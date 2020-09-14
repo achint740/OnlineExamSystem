@@ -16,10 +16,10 @@ $('#create_new').on('click',()=>{
         
 });   
 
-        
+
 function adder(){
     console.log("Add/Update Question Button clicked");
-    
+    $('#ques_list').remove();
 }
 
 function deleter(){
