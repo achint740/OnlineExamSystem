@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const questions = new Sequelize({
     dialect : 'sqlite',
-    storage : __dirname + 'ques.db'
+    storage : __dirname + '/ques.db'
 });
 
 const quesdb = questions.define('ques',{
@@ -12,7 +12,7 @@ const quesdb = questions.define('ques',{
     },
     ques_no : {
         type : Sequelize.INTEGER,
-        allowNull : false
+        allowNull : true
     },
     question : {
         type : Sequelize.STRING,
