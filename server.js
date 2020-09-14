@@ -20,6 +20,8 @@ app.use(session({
 //-----------------------------LOAD SITE ON REQUEST TO '/' -----------------------------
 app.use('/',exp.static(__dirname + '/public'));
 
+
+//----------------------------- POST REQUEST FOR ADD SUBJECT -----------------------------
 app.post('/addsubject',function(req,res){
 
     subjects.create({
@@ -31,6 +33,8 @@ app.post('/addsubject',function(req,res){
 
 });
 
+
+//-----------------------------POST REQUEST FOR ADD QUESTION -----------------------------
 app.post('/addques',function(req,res){
    
     questions.create({
@@ -47,6 +51,20 @@ app.post('/addques',function(req,res){
 
 });
 
+//-----------------------------GET REQUEST FOR VIEW QUESTION -----------------------------
+app.post('/viewexam',function(req,res){
+
+    questions.findAll({
+        where : {
+            sub_code : req.body.sub_code
+        } 
+    }).then((val)=>{
+        res.send(val);
+    });
+})
+
+
+//-----------------------------SERVER START -----------------------------
 app.listen(1001,()=>{
     console.log('Server started');
 });
