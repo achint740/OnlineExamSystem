@@ -1,6 +1,7 @@
 const exp = require("express");
 const app = exp();
 const subjects = require('./subjects_db').subjectsdb;
+const questions = require('./ques_db').quesdb;
 const session = require('express-session');
 
 
@@ -20,13 +21,27 @@ app.use(session({
 app.use('/',exp.static(__dirname + '/public'));
 
 app.post('/addsubject',function(req,res){
-    let name = req.body.sub_name;
-    let code = req.body.sub_code;
 
     subjects.create({
-        sub_code : code,
-        sub_name : name
+        sub_code : req.body.sub_name,
+        sub_name : req.body.sub_code
     }).then((createdsubject)=>{
+        res.send('Success');
+    });
+
+});
+
+app.post('/addques',function(req,res){
+   
+    questions.create({
+        sub_code : req.body.sub_code,
+        question : req.body.ques,
+        option1 : req.body.op1,
+        option2 : req.body.op2,
+        option3 : req.body.op3,
+        option4 : req.body.op4,
+        answer : req.body.ans
+    }).then((createdQues)=>{
         res.send('Success');
     });
 
