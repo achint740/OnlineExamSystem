@@ -2,7 +2,10 @@ const exp = require("express");
 const app = exp();
 const subjects = require('./subjects_db').subjectsdb;
 const questions = require('./ques_db').quesdb;
+const users = require('./Users_db').Users;
+const passport = require('./passport');
 const session = require('express-session');
+const { Users } = require("./Users_db");
 
 
 //----------------------------------------------------------
@@ -17,8 +20,26 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+
+//----------------------------- INITIALIZE PASSPORT -----------------------------
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 //-----------------------------LOAD SITE ON REQUEST TO '/' -----------------------------
 app.use('/',exp.static(__dirname + '/public'));
+
+
+//-----------------------------LOAD SITE ON REQUEST TO '/teacher' -----------------------------
+app.use('/teacher',exp.static(__dirname + '/public/Teachers'));
+
+
+//-----------------------------LOAD SITE ON REQUEST TO '/admin' -----------------------------
+app.use('/admin',exp.static(__dirname + '/public/Admin'));
+
+
+//-----------------------------LOAD SITE ON REQUEST TO '/student' -----------------------------
+app.use('/student',exp.static(__dirname + '/public/Student'));
 
 
 //----------------------------- POST REQUEST FOR ADD SUBJECT -----------------------------
@@ -62,6 +83,24 @@ app.post('/viewexam',function(req,res){
         res.send(val);
     });
 })
+
+
+//----------------------------- POST REQUEST FOR LOGIN -----------------------------
+app.post('/signup',(req,res)=>{
+    users.create({
+        username : req.body.username,
+        password : req.body.password
+    }).then((createdUser)=>{
+        console.log('User created Successfully');
+        res.redirect('/login');
+    });
+});
+
+
+//----------------------------- POST REQUEST FOR LOGIN -----------------------------
+app.post('/login',passport.authenticate('local',{failureRedirect : '/login'}),function(req,res){
+    return res.redirect('/' + req.user.category);
+});
 
 
 //-----------------------------SERVER START -----------------------------
