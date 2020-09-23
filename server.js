@@ -5,7 +5,6 @@ const questions = require('./ques_db').quesdb;
 const users = require('./Users_db').Users;
 const passport = require('./passport');
 const session = require('express-session');
-const { Users } = require("./Users_db");
 
 
 //----------------------------------------------------------
