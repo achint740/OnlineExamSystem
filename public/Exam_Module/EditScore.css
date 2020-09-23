@@ -1,0 +1,26 @@
+body{
+    text-align: center;
+    background-image: url('Img/editscore.jpg');
+    background-size: cover;
+}
+
+table{
+    margin-left: 34%;
+    border: 2px solid black;
+    margin-top: 100px;
+}
+
+td{
+    border : 2px solid black;
+    padding: 10px;
+}
+
+th{
+    border : 2px solid black;
+    padding: 10px;
+}
+
+input{
+    text-align: center;
+}
+

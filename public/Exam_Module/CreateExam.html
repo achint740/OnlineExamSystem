@@ -4,19 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Exam</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="CreateExam.css">
 </head>
 <body>
-    <h1>Create Exam</h1> 
 
-    <h4>Enter Subject Code : </h4>
-    <input  id="sub_code" type="text">
+    <div id="createexamform">
+        <h1>Schedule Exam</h1> 
 
-    <br>
+        <br>
 
-    <h4>Enter Subject Name : </h4>
-    <input  id="sub_name" type="text">
+        <h4>Enter Subject Code : </h4>
+        <input  id="sub_code" type="text">
 
-    <button id="create_exam">CREATE</button>
+        <br><br>
+
+        <h4>Enter Subject Name : </h4>
+        <input  id="sub_name" type="text">
+
+        <br><br>
+
+        <h4>Enter Date  : </h4>
+        <input  id="dateexam" type="date">
+        
+        <br><br>
+
+        <button id="create_exam" type="button" class="btn btn-primary" >CREATE</button>
+
+    </div>
     
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 

@@ -3,20 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="ViewExam.css">
     <title>View Exams</title>
 </head>
 <body>
 
     <div id="one">
-    
-        Subject Code :  <input type="text" id="sub_code">
+
+        <h1>View Exam Interface</h1>
+
         <br><br>
-        <button id="viewexam">View Exam</button>
+    
+        Enter Subject Code :  <input type="text" id="sub_code">
+        <br><br>
+        <button id="viewexam" class="btn btn-primary">View Exam</button>
 
     </div>
 
     <div id="two">
+
+        <h1>Questions For SE303</h1>
+
+        <br>
         
+        <p>Q1. What is the Time Complexity of Merge Sort?</p>
+        <div id="opt">
+            <input type="radio">O(N*N) <br>
+            <input type="radio">O(N) <br>
+            <input type="radio">O(sqrt(N)) <br>
+            <input type="radio">O(N*logN) <br>
+        </div>
+        <br><br>
+
+        <p>Q2. What is the Time Complexity of Quick Sort?</p>
+        <div id="opt">
+            <input type="radio">O(N*N) <br>
+            <input type="radio">O(N) <br>
+            <input type="radio">O(sqrt(N)) <br>
+            <input type="radio">O(N*logN) <br>
+        </div>
+
+        <br><br>
+
+        <p>Q3. What is the Time Complexity of Bubble Sort?</p>
+        <div id="opt">
+            <input type="radio">O(N*N) <br>
+            <input type="radio">O(N) <br>
+            <input type="radio">O(sqrt(N)) <br>
+            <input type="radio">O(N*logN) <br>
+        </div>
+
+        <br><br>
+
+        <p>Q4. What is the Time Complexity of Selection Sort?</p>
+        <div id="opt">
+            <input type="radio">O(N*N) <br>
+            <input type="radio">O(N) <br>
+            <input type="radio">O(sqrt(N)) <br>
+            <input type="radio">O(N*logN) <br>
+        </div>
+
+        <br><br>
+
+        <button type="submit" class="btn btn-primary"></button>
 
     </div>
 

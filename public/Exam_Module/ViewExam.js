@@ -20,4 +20,7 @@ $('#viewexam').on('click',()=>{
         });
     });
 
+    $('#one').hide();
+    $('#two').show();
+
 })

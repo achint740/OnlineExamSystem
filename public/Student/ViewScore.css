@@ -1,0 +1,10 @@
+body{
+    background-image: url('Img/result.jpeg');
+    background-size: cover;
+}
+
+div{
+    text-align: center;
+    margin-top: 200px;
+    color: white;
+}

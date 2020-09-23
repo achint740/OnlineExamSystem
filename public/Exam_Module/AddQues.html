@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="AddQues.css">
     <title>Add Question</title>
 </head>
 <body>
@@ -10,21 +13,21 @@
     <h1>Add a New Question</h1>
 
     <form method="POST" action="/addques">
-        Subject Code : <input type="text" name="sub_code">
+        <span id="one">Subject Code :  </span><input type="text" name="sub_code">
         <br><br>
-        Question :     <input type="text" name="ques"    >
+        <span id="one">Question : &nbsp;  &nbsp; &nbsp;  </span><input type="text" name="ques"    >
         <br><br>
-        Option A :     <input type="text" name="op1"     >
+        <span id="one"> Option A : &nbsp;  &nbsp; &nbsp;  </span>   <input type="text" name="op1"     >
         <br><br>
-        Option B :     <input type="text" name="op2"     >
+        <span id="one">Option B :  &nbsp;  &nbsp; &nbsp;   </span><input type="text" name="op2"     >
         <br><br>
-        Option C :     <input type="text" name="op3"     >
+        <spane id="one">Option C : &nbsp;  &nbsp; &nbsp; </spane><input type="text" name="op3"     >
         <br><br>
-        Option D :     <input type="text" name="op4"     > 
+        <span id="one">Option D :   &nbsp;  &nbsp; &nbsp;</span><input type="text" name="op4"     > 
         <br><br>
-        Correct Ans :  <input type="text" name="ans"     >
+        <span id="one">Correct Ans : &nbsp; </span><input type="text" name="ans"     >
         <br><br>
-        <button type="submit">ADD</button>
+        <button type="submit" class="btn btn-success">ADD</button>
     </form>
 </body>
 </html>
