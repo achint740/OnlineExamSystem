@@ -14,9 +14,25 @@ $('#viewexam').on('click',()=>{
     $.post('/viewexam',obj,(data)=>{
         // console.log(data);
         data.forEach((ques) => {
-            for(var key of Object.keys(ques)){
-                console.log(key + "  " + ques[key]);
+            
+            //QUESTION
+            var para = document.createElement("p");
+            var q = document.createTextNode(ques["id"] + "  " + ques["question"]);
+            para.appendChild(q);
+            var ele = document.getElementById("two");
+            ele.appendChild(para);
+
+            //Options
+            for(var i=1;i<=4;i++){
+                var p = document.createElement("p");
+                var k = "option";
+                k+=i;
+                var op = document.createTextNode(k + "  " + ques[k]);
+                p.appendChild(op);
+                var e = document.getElementById("two");
+                e.appendChild(p);
             }
+            
         });
     });
 
