@@ -42,6 +42,10 @@ app.use('/admin',exp.static(__dirname + '/public/Admin'));
 app.use('/student',exp.static(__dirname + '/public/Student'));
 
 
+//-----------------------------LOAD SITE ON REQUEST TO '/login' -----------------------------
+app.use('/login',exp.static(__dirname + '/public/Login'));
+
+
 //----------------------------- POST REQUEST FOR ADD SUBJECT -----------------------------
 app.post('/addsubject',function(req,res){
 
@@ -72,7 +76,8 @@ app.post('/addques',function(req,res){
 
 });
 
-//-----------------------------GET REQUEST FOR VIEW QUESTION -----------------------------
+
+//-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
 app.post('/viewexam',function(req,res){
 
     questions.findAll({
@@ -86,15 +91,15 @@ app.post('/viewexam',function(req,res){
 
 app.post('/submitexam',function(req,res){
 
-    let m = calculate_and_update_marks(req.body);
-    console.log("Marks Obtained = " + m);
+    let m = calculate_and_update_marks(req.body,req.user);
+    //console.log("Marks Obtained = " + m);
 
     res.redirect('/student');
 
 });
 
 
-//----------------------------- POST REQUEST FOR LOGIN -----------------------------
+//----------------------------- POST REQUEST FOR SIGN UP -----------------------------
 app.post('/signup',(req,res)=>{
     users.create({
         username : req.body.username,
@@ -112,12 +117,18 @@ app.post('/login',passport.authenticate('local',{failureRedirect : '/login'}),fu
 });
 
 
+//----------------------------- POST REQUEST FOR LOGIN -----------------------------
+app.get('/profile',function(req,res){
+    res.send(req.user);
+});
+
+
 //-----------------------------SERVER START -----------------------------
 app.listen(1001,()=>{
     console.log('Server started');
 });
 
-function calculate_and_update_marks(obj){
+function calculate_and_update_marks(obj,student){
     // for(key in obj){
     //     console.log(key + " --> " + obj[key]);
     // } 
@@ -125,7 +136,7 @@ function calculate_and_update_marks(obj){
 
     questions.findAll({
         where : {
-            sub_code : 'SE303'
+            sub_code : obj.sub_code
         }
     }).then((data)=>{
         data.forEach((q) => {
@@ -136,8 +147,8 @@ function calculate_and_update_marks(obj){
         });
         total_marks*=4;
         console.log("Returning marks are ",total_marks)
-        let user = "2k18/AB/002";
-        let code = "SE303";
+        let user = student.username;
+        let code = obj.sub_code;
 
         marks.create({
             sub_code : code,

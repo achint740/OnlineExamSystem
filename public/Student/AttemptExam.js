@@ -1,3 +1,18 @@
+$(document).ready(()=>{
+    $.get('/profile',(data)=>{
+        if(data.username!=undefined){
+            console.log("Welcome " + data.username);
+            console.log(data.category);
+        }
+        else{
+            alert("Please Login");
+            document.location.href='/login';
+        }
+    });
+
+    $('#two').hide();
+});
+
 
 $('#attemptexam').on('click',()=>{
 
@@ -10,6 +25,13 @@ $('#attemptexam').on('click',()=>{
     };
 
     $.post('/viewexam',obj,(data)=>{
+
+        var code_inp = document.createElement("input");
+        code_inp.type = 'text';
+        code_inp.defaultValue = code;
+        code_inp.name = 'sub_code';
+        code_inp.setAttribute('readonly',true);
+        document.getElementById('two').appendChild(code_inp);
 
         data.forEach((ques) => {
         
