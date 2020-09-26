@@ -87,8 +87,23 @@ app.post('/viewexam',function(req,res){
     }).then((val)=>{
         res.send(val);
     });
-})
+});
 
+
+//-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
+app.post('/markslist',function(req,res){
+
+    marks.findAll({
+        where : {
+            sub_code : req.body.sub_code
+        } 
+    }).then((val)=>{
+        res.send(val);
+    });
+});
+
+
+//-----------------------------POST REQUEST FOR SUBMIT EXAM -----------------------------
 app.post('/submitexam',function(req,res){
 
     let m = calculate_and_update_marks(req.body,req.user);
@@ -96,6 +111,26 @@ app.post('/submitexam',function(req,res){
 
     res.redirect('/student');
 
+});
+
+
+//-----------------------------POST REQUEST FOR SUBMIT EXAM -----------------------------
+app.post('/changemarks',function(req,res) {
+    let msg = 'Failure';
+    marks.findOne({
+        where : {sub_code : req.body.sub_code,username : req.body.username}
+    }).then((record)=>{
+            if(record){
+                msg = 'Success';
+                record.update({
+                    marks_given : req.body.newmarks
+                })
+            }
+            else{
+                //No Such Record Found
+            }
+            res.send(msg);
+        });
 });
 
 

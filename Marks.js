@@ -12,7 +12,8 @@ const marksdb = marks.define('mark',{
     },
     username : {
         type : Sequelize.STRING,
-        allowNull : false
+        allowNull : false,
+        unique : true
     },
     marks_given : {
         type : Sequelize.INTEGER,
