@@ -3,6 +3,7 @@ const app = exp();
 const subjects = require('./subjects_db').subjectsdb;
 const questions = require('./ques_db').quesdb;
 const users = require('./Users_db').Users;
+const marks = require('./Marks').marksdb;
 const passport = require('./passport');
 const session = require('express-session');
 
@@ -83,6 +84,15 @@ app.post('/viewexam',function(req,res){
     });
 })
 
+app.post('/submitexam',function(req,res){
+
+    let m = calculate_and_update_marks(req.body);
+    console.log("Marks Obtained = " + m);
+
+    res.redirect('/student');
+
+});
+
 
 //----------------------------- POST REQUEST FOR LOGIN -----------------------------
 app.post('/signup',(req,res)=>{
@@ -106,3 +116,38 @@ app.post('/login',passport.authenticate('local',{failureRedirect : '/login'}),fu
 app.listen(1001,()=>{
     console.log('Server started');
 });
+
+function calculate_and_update_marks(obj){
+    // for(key in obj){
+    //     console.log(key + " --> " + obj[key]);
+    // } 
+    let total_marks = 0;
+
+    questions.findAll({
+        where : {
+            sub_code : 'SE303'
+        }
+    }).then((data)=>{
+        data.forEach((q) => {
+            console.log(q["id"] + "//" + q["answer"] + "//" + obj[q["id"]]);
+            if(q["answer"] === obj[q["id"]]){
+                total_marks+=1;
+            }
+        });
+        total_marks*=4;
+        console.log("Returning marks are ",total_marks)
+        let user = "2k18/AB/002";
+        let code = "SE303";
+
+        marks.create({
+            sub_code : code,
+            username : user,
+            marks_given : total_marks
+        }).then((info)=>{
+            console.log('Exam Attempted Successfully!');
+            console.log("Marks Alloted : " + total_marks + " For Roll No. " + user);
+        });
+        return total_marks;
+
+    });
+}

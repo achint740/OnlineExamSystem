@@ -6,12 +6,23 @@
     <title>Student</title>
 </head>
 <body>
-    <h1>Student</h1>
 
-    Subject Code : <input type="text" id="code">
-    <button><a href="../Exam_Module/AttemptExam.html">Attempt Examination</a></button>
+    <div id="one">
+        <h1>Student</h1>
 
-    <button><a href="ViewScore.html">View Score</a></button>
+        Subject Code : <input type="text" id="sub_code">
+        <button id="attemptexam">Attempt Examination</button>
+
+        <button id="getmarks">View Score</button>
+    </div>
+
+    <form id="two" action="/submitexam" method="POST">
+
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+    crossorigin="anonymous"></script>
+    <script src="AttemptExam.js"></script>
 
 </body>
 </html>
