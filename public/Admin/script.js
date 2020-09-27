@@ -14,3 +14,13 @@ $(()=>{
         }
     });
 });
+
+$('#logout_btn').on('click',()=>{
+    $.get('/logout',(data)=>{
+        if(data=='Success'){
+        //Logged Out Successfully
+            alert("Logged Out! Please login to access the portal");
+            document.location.href = '/login';
+        }
+    })
+})

@@ -28,6 +28,7 @@ $("#create_exam").on('click',()=>{
     $.post('/addsubject',obj,(data)=>{
         if(data=='Success'){
             alert('Subject Added to Database');
+            //Append a button to be referanced to Add Question Page
         }
         else{
             alert('Failure');

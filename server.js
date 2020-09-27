@@ -118,7 +118,7 @@ app.post('/deleteques',function(req,res){
         }
     });
     res.send('Success');
-})
+});
 
 
 //-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
@@ -214,9 +214,17 @@ app.post('/login',passport.authenticate('local',{failureRedirect : '/login'}),fu
 });
 
 
-//----------------------------- POST REQUEST FOR LOGIN -----------------------------
+//----------------------------- GET REQUEST FOR PROFILE -----------------------------
 app.get('/profile',function(req,res){
     res.send(req.user);
+});
+
+
+//----------------------------- GET REQUEST FOR LOGOUT -----------------------------
+app.get('/logout',function(req,res){
+    console.log("Logging Out " + req.user.username);
+    req.logout();
+    res.send('Success');
 });
 
 
