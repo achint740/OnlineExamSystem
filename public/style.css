@@ -1,0 +1,49 @@
+body{
+    background-image: url('./Images/FR1.png');
+    background-size: cover;
+}
+
+h1{
+    font-family: 'Changa', sans-serif;
+    text-align: center;
+    font-size: 70px;
+}
+
+#dot1{
+    height: 200px;
+    width: 200px;
+    background-color: rgb(219, 12, 12);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right : 50px;
+    margin-top: 100px;
+}
+
+h2{
+text-align : center;
+margin-top : 80px;
+color: black
+}
+
+#dot2{
+    height: 200px;
+    width: 200px;
+    background-color: rgb(213, 231, 48);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right : 50px;
+    margin-top: 100px;
+}
+
+#dot3{
+    height: 200px;
+    width: 200px;
+    background-color: rgb(44, 223, 28);
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 100px;
+}
+
+div{
+    text-align: center;
+}

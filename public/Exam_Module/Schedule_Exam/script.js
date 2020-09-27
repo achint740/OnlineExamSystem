@@ -4,7 +4,8 @@ $("#create_exam").on('click',()=>{
 
     let obj = {
         sub_code : $("#sub_code").val(),
-        sub_name : $("#sub_name").val()
+        sub_name : $("#sub_name").val(),
+        date_of_exam : $('#dateexam').val()
     };
 
     $.post('/addsubject',obj,(data)=>{
