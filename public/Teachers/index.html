@@ -14,5 +14,24 @@
 
     <button><a href="../Exam_Module/Edit_Results/index.html">Edit Results</a></button>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+    crossorigin="anonymous"></script>
+    <script>
+        $.get('/profile',(data)=>{
+            if(data.username==undefined){
+                alert('Please Login');
+                document.location.href = '/login';
+            }
+            else if(data.category=="student"){
+                alert("Not Authorized");
+                document.location.href='/student';
+            }
+            else{
+                console.log("Welcome " + data.username);
+                console.log(data.category);
+            }
+        });
+    </script>
+
 </body>
 </html>
