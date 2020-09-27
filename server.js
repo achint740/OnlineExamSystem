@@ -42,6 +42,10 @@ app.use('/admin',exp.static(__dirname + '/public/Admin'));
 app.use('/student',exp.static(__dirname + '/public/Student'));
 
 
+//-----------------------------LOAD SITE ON REQUEST TO '/successques' -----------------------------
+app.use('/successques',exp.static(__dirname + '/public/Exam_Module/Ques_Success'));
+
+
 //-----------------------------LOAD SITE ON REQUEST TO '/login' -----------------------------
 app.use('/login',exp.static(__dirname + '/public/Login'));
 
@@ -51,7 +55,8 @@ app.post('/addsubject',function(req,res){
 
     subjects.create({
         sub_code : req.body.sub_name,
-        sub_name : req.body.sub_code
+        sub_name : req.body.sub_code,
+        date_of_exam : req.body.date_of_exam
     }).then((createdsubject)=>{
         res.send('Success');
     });
@@ -71,10 +76,49 @@ app.post('/addques',function(req,res){
         option4 : req.body.op4,
         answer : req.body.ans
     }).then((createdQues)=>{
-        res.send('Success');
+        res.redirect('/successques');
     });
 
 });
+
+
+//-----------------------------POST REQUEST FOR UPDATE QUESTION -----------------------------
+app.post('/updateques',function(req,res){
+    let msg = 'Failure';
+    questions.findOne({
+        where : {
+            sub_code : req.body.sub_code,
+            id : req.body.id
+        }
+    }).then((ques)=>{
+        if(ques){
+            msg = 'Success';
+            ques.update({
+                question : req.body.question,
+                option1 : req.body.option1,
+                option2 : req.body.option2,
+                option3 : req.body.option3,
+                option4 : req.body.option4
+            })
+        }
+        else{
+            //No Such Question Found
+        }
+        res.send(msg);
+    })
+});
+
+
+//-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
+app.post('/deleteques',function(req,res){
+    questions.destroy({
+        where : {
+            id : req.body.id,
+            sub_code : req.body.sub_code
+        }
+    });
+    res.send('Success');
+})
 
 
 //-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
@@ -160,7 +204,7 @@ app.get('/profile',function(req,res){
 
 //-----------------------------SERVER START -----------------------------
 app.listen(1001,()=>{
-    console.log('Server started');
+    console.log('Server started at http://localhost:1001/');
 });
 
 function calculate_and_update_marks(obj,student){

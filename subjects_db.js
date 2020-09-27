@@ -12,6 +12,11 @@ const subjectsdb = subjects.define('subjects',{
     },
     sub_name : {
         type : Sequelize.STRING,
+        allowNull : false
+    },
+    date_of_exam : {
+        type : Sequelize.DATEONLY,
+        allowNull : false
     }
 });
 
