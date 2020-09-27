@@ -13,23 +13,25 @@
     <h1>Add a New Question</h1>
 
     <form method="POST" action="/addques">
-        <span id="one">Subject Code :  </span><input type="text" name="sub_code">
+        <span id="one">Subject Code :  </span><input type="text" name="sub_code" required>
         <br><br>
-        <span id="one">Question : &nbsp;  &nbsp; &nbsp;  </span><input type="text" name="ques"    >
+        <span id="one">Question : &nbsp;  &nbsp; &nbsp;  </span><input type="text" name="ques" required>
         <br><br>
-        <span id="one"> Option A : &nbsp;  &nbsp; &nbsp;  </span>   <input type="text" name="op1"     >
+        <span id="one"> Option A : &nbsp;  &nbsp; &nbsp;  </span>   <input type="text" name="op1" required    >
         <br><br>
-        <span id="one">Option B :  &nbsp;  &nbsp; &nbsp;   </span><input type="text" name="op2"     >
+        <span id="one">Option B :  &nbsp;  &nbsp; &nbsp;   </span><input type="text" name="op2" required    >
         <br><br>
-        <spane id="one">Option C : &nbsp;  &nbsp; &nbsp; </spane><input type="text" name="op3"     >
+        <spane id="one">Option C : &nbsp;  &nbsp; &nbsp; </spane><input type="text" name="op3"  required   >
         <br><br>
-        <span id="one">Option D :   &nbsp;  &nbsp; &nbsp;</span><input type="text" name="op4"     > 
+        <span id="one">Option D :   &nbsp;  &nbsp; &nbsp;</span><input type="text" name="op4"  required   > 
         <br><br>
-        <span id="one">Correct Ans : &nbsp; </span><input type="text" name="ans"     >
+        <span id="one">Correct Ans : &nbsp; </span><input type="text" name="ans"  required   >
         <br><br>
         <button type="submit" class="btn btn-success">ADD</button>
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+    crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 </html>

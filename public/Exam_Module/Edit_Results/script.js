@@ -1,9 +1,25 @@
 $(()=>{
+    $.get('/profile',(data)=>{
+        if(data.username==undefined){
+            alert("Please Login");
+            document.location.href='/login';
+        }
+        if(data.category=="student"){
+            alert("Not Authorized");
+            document.location.href = '/student';
+        }
+        else{
+            console.log("Welcome " + data.username);
+            console.log(data.category);
+        }
+        
+    });
     $('#markstable').hide();
 });
 
-$('#showtable').on('click',()=>{
+$('#showtable').on('click',refresh);
 
+function refresh(){
     let obj = {
         sub_code : $('#sub_code').val()
     }    
@@ -12,9 +28,15 @@ $('#showtable').on('click',()=>{
 
     $.post('/markslist',obj,(data)=>{
 
-        $('#markstable').empty().show();
+        if(data.length>0){
+            $('#markstable').empty().show();
+            $('#markstable').append('<tr><th>Sr. No.  </th><th>Roll No. </th><th>Marks Given</th><th>New Marks</th><th>Action</th></tr>');
+        }
 
-        $('#markstable').append('<tr><th>Sr. No.  </th><th>Roll No. </th><th>Marks Given</th><th>New Marks</th><th>Action</th></tr>');
+        else{
+            $('#markstable').empty();
+            alert("No Record Found for this Subject!");
+        }
 
         data.forEach((record) => {
             
@@ -64,7 +86,7 @@ $('#showtable').on('click',()=>{
 
     });
 
-});
+}
 
 function changemarks(roll,new_marks) {
 
@@ -79,7 +101,7 @@ function changemarks(roll,new_marks) {
    $.post('/changemarks',obj,(data)=>{
        if(data=='Success'){
             alert("Marks for : " + roll + " changed to : " + new_marks);
-            $('#showtable').click();
+            refresh();
        }
        else{
            alert('Failure! Not able to update');
