@@ -18,17 +18,36 @@ $('#attemptexam').on('click',()=>{
 
     let code = $('#sub_code').val();
 
-    console.log('Sending request to view questions in Exam ' + code);
-
     let obj = {
         sub_code : code
     };
 
+    $.post('/checkattempt',obj,(data)=>{
+        console.log(data);
+        if(data=="Yes"){
+            alert('Already Attempted');
+            document.location.href = '/student';
+        }
+        else{
+            alert('Sending request to view questions in Exam ' + code);
+            load_exam(obj);
+        }
+    });
+
+});
+
+function load_exam(obj){
+
     $.post('/viewexam',obj,(data)=>{
+
+        if(data.length==0){
+            alert("No Such Exam Scheduled!");
+            document.location.href = '/student';
+        }
 
         var code_inp = document.createElement("input");
         code_inp.type = 'text';
-        code_inp.defaultValue = code;
+        code_inp.defaultValue = obj.sub_code;
         code_inp.name = 'sub_code';
         code_inp.setAttribute('readonly',true);
         document.getElementById('two').appendChild(code_inp);
@@ -81,5 +100,4 @@ $('#attemptexam').on('click',()=>{
         $('#two').show();
 
     })
-
-})
+}

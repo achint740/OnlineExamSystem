@@ -147,6 +147,24 @@ app.post('/markslist',function(req,res){
 });
 
 
+//-----------------------------POST REQUEST FOR CHECK ATTEMPT -----------------------------
+app.post('/checkattempt',function(req,res){
+    marks.findOne({
+        where : {
+            sub_code : req.body.sub_code,
+            username : req.user.username
+        }
+    }).then((val)=>{
+        if(val){
+            res.send("Yes");
+        }
+        else{
+            res.send("No");
+        }
+    })
+})
+
+
 //-----------------------------POST REQUEST FOR SUBMIT EXAM -----------------------------
 app.post('/submitexam',function(req,res){
 
