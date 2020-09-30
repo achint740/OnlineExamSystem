@@ -134,7 +134,7 @@ app.post('/viewexam',function(req,res){
 });
 
 
-//-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
+//-----------------------------POST REQUEST FOR VIEW MARKS LIST -----------------------------
 app.post('/markslist',function(req,res){
 
     marks.findAll({
@@ -145,6 +145,19 @@ app.post('/markslist',function(req,res){
         res.send(val);
     });
 });
+
+
+//-----------------------------POST REQUEST FOR VIEW MARKS -----------------------------
+app.post('/getmarks',function(req,res){
+    marks.findOne({
+        where : {
+            sub_code : req.body.sub_code,
+            username : req.user.username
+        }
+    }).then((val)=>{
+        res.send(val);
+    })
+})
 
 
 //-----------------------------POST REQUEST FOR CHECK ATTEMPT -----------------------------
