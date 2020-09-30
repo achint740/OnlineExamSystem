@@ -11,6 +11,7 @@ $(document).ready(()=>{
     });
 
     $('#two').hide();
+    $('#three').hide();
 });
 
 
@@ -35,6 +36,22 @@ $('#attemptexam').on('click',()=>{
     });
 
 });
+
+$('#getmarks').on('click',()=>{
+
+    $('#three').show();
+
+    let obj = {
+        sub_code : $('#sub_code').val()
+    }
+
+    $.post('/getmarks',obj,(data)=>{
+        //var marks = document.createTextNode(data.dataValues.marks_given);
+        var m = document.createTextNode(data.marks_given);
+        // console.log(data.marks_given);
+        document.getElementById('myscore').appendChild(m);
+    })
+})
 
 function load_exam(obj){
 
