@@ -1,9 +1,11 @@
 const exp = require("express");
 const app = exp();
-const subjects = require('./subjects_db').subjectsdb;
-const questions = require('./ques_db').quesdb;
-const users = require('./Users_db').Users;
-const marks = require('./Marks').marksdb;
+const subjects = require('./db').subjectsdb;
+const questions = require('./db').quesdb;
+const users = require('./db').usersDB;
+const marks = require('./db').marksDB;
+const ExcelJS = require('exceljs');
+const workbook = new ExcelJS.Workbook();
 const passport = require('./passport');
 const session = require('express-session');
 
@@ -76,6 +78,7 @@ app.post('/addques',function(req,res){
         option4 : req.body.op4,
         answer : req.body.ans
     }).then((createdQues)=>{
+        console.log(createdQues);
         res.redirect('/successques');
     });
 
@@ -109,7 +112,7 @@ app.post('/updateques',function(req,res){
 });
 
 
-//-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
+//-----------------------------POST REQUEST FOR DELETE QUESTION -----------------------------
 app.post('/deleteques',function(req,res){
     questions.destroy({
         where : {
@@ -128,9 +131,45 @@ app.post('/viewexam',function(req,res){
         where : {
             sub_code : req.body.sub_code
         } 
-    }).then((val)=>{
-        res.send(val);
+    }).then((ques_list)=>{
+        res.send(ques_list);
     });
+});
+
+//-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
+app.post('/lockexam',function(req,res){
+
+    let col = [];
+
+    questions.findAll({
+        where : {
+            sub_code : req.body.sub_code
+        }
+    }).then((ques_list)=>{
+        console.log(ques_list.length);
+        ques_list.forEach((q)=>{
+            let id = (q.dataValues).id;
+            let obj = {
+                header : id,
+                key : id,
+                width : 10
+            }
+            col.push(obj);
+        })
+    })
+
+    var newsubject_sheet = workbook.addWorksheet(req.body.sub_code);
+    newsubject_sheet.columns = col;
+
+    var filename = "Responses.xlsx";
+    workbook.xlsx.writeFile(filename).then(()=>{
+        // callback(null);
+        console.log('Success');
+    }).catch((err)=>{
+        console.log(err);
+    });
+
+
 });
 
 
@@ -257,6 +296,7 @@ function calculate_and_update_marks(obj,student){
             sub_code : obj.sub_code
         }
     }).then((data)=>{
+        
         data.forEach((q) => {
             console.log(q["id"] + "//" + q["answer"] + "//" + obj[q["id"]]);
             if(q["answer"] === obj[q["id"]]){
