@@ -1,6 +1,7 @@
+const { concatSeries } = require('async');
 const passport = require('passport');
 const strategy = require('passport-local').Strategy;
-const Users = require('./Users_db').Users;
+const Users = require('./db').usersDB;
 
 passport.use(new strategy(
     function(username,password,done){
@@ -10,10 +11,12 @@ passport.use(new strategy(
             }
         }).then((user)=>{
             if(!user){
-                console.log('You havent signed up buddy!!');
+                console.log('No such user found in database');
                 return done(null,false,{message : 'Incorrect UserName'});
             }
             if(user.password != password){
+                console.log("Entered Password : " + password);
+                console.log("User Password in Database : " + user.password);
                 console.log('MisMatch!\nTry Again!!');
                 return done(null,false,{message : 'Incorrect Password'});
             }
