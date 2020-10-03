@@ -1,5 +1,5 @@
 $(()=>{
-    $.get('/profile',(data)=>{
+    $.get('/users/profile',(data)=>{
         if(data.username==undefined){
             alert("Please Login");
             document.location.href='/login';
@@ -25,7 +25,7 @@ $("#create_exam").on('click',()=>{
         date_of_exam : $('#dateexam').val(),
     };
 
-    $.post('/addsubject',obj,(data)=>{
+    $.post('/exam/schedule',obj,(data)=>{
         if(data=='Success'){
             alert('Subject Added to Database');
             //Append a button to be referanced to Add Question Page

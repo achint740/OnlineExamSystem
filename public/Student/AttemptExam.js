@@ -1,5 +1,5 @@
 $(document).ready(()=>{
-    $.get('/profile',(data)=>{
+    $.get('/users/profile',(data)=>{
         if(data.username!=undefined){
             console.log("Welcome " + data.username);
             console.log(data.category);
@@ -23,7 +23,7 @@ $('#attemptexam').on('click',()=>{
         sub_code : code
     };
 
-    $.post('/checkattempt',obj,(data)=>{
+    $.post('/marks/checkattempt',obj,(data)=>{
         console.log(data);
         if(data=="Yes"){
             alert('Already Attempted');
@@ -45,7 +45,7 @@ $('#getmarks').on('click',()=>{
         sub_code : $('#sub_code').val()
     }
 
-    $.post('/getmarks',obj,(data)=>{
+    $.post('/marks/my',obj,(data)=>{
         //var marks = document.createTextNode(data.dataValues.marks_given);
         var m = document.createTextNode(data.marks_given);
         // console.log(data.marks_given);
@@ -55,7 +55,7 @@ $('#getmarks').on('click',()=>{
 
 function load_exam(obj){
 
-    $.post('/viewexam',obj,(data)=>{
+    $.post('/exam/view',obj,(data)=>{
 
         if(data.length==0){
             alert("No Such Exam Scheduled!");

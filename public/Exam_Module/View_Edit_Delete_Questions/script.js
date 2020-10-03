@@ -1,5 +1,5 @@
 $(()=>{
-    $.get('/profile',(data)=>{
+    $.get('/users/profile',(data)=>{
         if(data.username==undefined){
             alert("Please Login");
             document.location.href='/login';
@@ -26,7 +26,7 @@ $('#viewexam').on('click',()=>{
         sub_code : code
     };
 
-    $.post('/viewexam',obj,(data)=>{
+    $.post('/exam/view',obj,(data)=>{
         // console.log(data);
         $('#two').empty();
         data.forEach((ques) => {
@@ -105,7 +105,7 @@ $('#viewexam').on('click',()=>{
 });
 
 function update_ques(obj){
-    $.post('/updateques',obj,(data)=>{
+    $.post('/ques/update',obj,(data)=>{
         if(data=='Success')
             alert("Question " + obj.id + " Updated Successfully");
         else 
@@ -114,7 +114,7 @@ function update_ques(obj){
 }
 
 function delete_ques(obj){
-    $.post('/deleteques',obj,(data)=>{
+    $.post('/ques/delete',obj,(data)=>{
         if(data=='Success'){
             $('#viewexam').click();
             alert("Question " + obj.id + " Deleted Successfully");

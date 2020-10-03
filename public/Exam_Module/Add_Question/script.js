@@ -1,5 +1,5 @@
 $(()=>{
-    $.get('/profile',(data)=>{
+    $.get('/users/profile',(data)=>{
         if(data.username==undefined){
             alert("Please Login");
             document.location.href='/login';

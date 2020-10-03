@@ -1,5 +1,5 @@
 $(()=>{
-    $.get('/profile',(data)=>{
+    $.get('/users/profile',(data)=>{
         if(data.username==undefined){
             alert("Please Login");
             document.location.href='/login';
@@ -26,7 +26,7 @@ function refresh(){
 
     let sr_no = 1;
 
-    $.post('/markslist',obj,(data)=>{
+    $.post('/marks/list',obj,(data)=>{
 
         if(data.length>0){
             $('#markstable').empty().show();
@@ -98,7 +98,7 @@ function changemarks(roll,new_marks) {
 
    console.log(obj);
 
-   $.post('/changemarks',obj,(data)=>{
+   $.post('/marks/change',obj,(data)=>{
        if(data=='Success'){
             alert("Marks for : " + roll + " changed to : " + new_marks);
             refresh();

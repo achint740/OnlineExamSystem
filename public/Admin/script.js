@@ -1,5 +1,5 @@
 $(()=>{
-    $.get('/profile',(data)=>{
+    $.get('/users/profile',(data)=>{
         if(data.username==undefined){
             alert("Please Login");
             document.location.href='/login';
@@ -16,7 +16,7 @@ $(()=>{
 });
 
 $('#logout_btn').on('click',()=>{
-    $.get('/logout',(data)=>{
+    $.get('/users/logout',(data)=>{
         if(data=='Success'){
         //Logged Out Successfully
             alert("Logged Out! Please login to access the portal");
