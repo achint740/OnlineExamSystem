@@ -92,8 +92,8 @@ $('#viewexam').on('click',()=>{
             let obj = {
                 sub_code : $('#sub_code').val()
             };
-            $.post('/lockexam',obj,(data)=>{
-                console.log(data);
+            $.post('/exam/finalise',obj,(data)=>{
+                alert(data);
             })
         });
 
