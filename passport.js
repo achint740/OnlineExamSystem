@@ -1,4 +1,3 @@
-const { concatSeries } = require('async');
 const passport = require('passport');
 const strategy = require('passport-local').Strategy;
 const Users = require('./db').usersDB;
