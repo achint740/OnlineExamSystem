@@ -83,6 +83,20 @@ $('#viewexam').on('click',()=>{
             });
             
         });
+
+        var final_btn = document.createElement("button");
+        final_btn.textContent = "FINALISE";
+        document.getElementById("two").appendChild(final_btn);
+
+        final_btn.addEventListener("click",function(){
+            let obj = {
+                sub_code : $('#sub_code').val()
+            };
+            $.post('/lockexam',obj,(data)=>{
+                console.log(data);
+            })
+        });
+
     });
 
     // $('#one').hide();
