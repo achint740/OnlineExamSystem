@@ -1,13 +1,10 @@
 const exp = require("express");
 const app = exp();
-const subjects = require('./db').subjectsdb;
-const questions = require('./db').quesdb;
-const users = require('./db').usersDB;
-const marks = require('./db').marksDB;
-const ExcelJS = require('exceljs');
-const workbook = new ExcelJS.Workbook();
-const passport = require('./passport');
 const session = require('express-session');
+const exam = require('./Routes/exam').route;
+const users = require('./Routes/users').route;
+const ques = require('./Routes/ques').route;
+const marks = require('./Routes/marks').route;
 
 
 //----------------------------------------------------------
@@ -21,11 +18,6 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
 }));
-
-
-//----------------------------- INITIALIZE PASSPORT -----------------------------
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 //-----------------------------LOAD SITE ON REQUEST TO '/' -----------------------------
@@ -52,232 +44,238 @@ app.use('/successques',exp.static(__dirname + '/public/Exam_Module/Ques_Success'
 app.use('/login',exp.static(__dirname + '/public/Login'));
 
 
+app.use('/exam',exam);
+app.use('/marks',marks);
+app.use('/users',users);
+app.use('/ques',ques);
+
+
 //----------------------------- POST REQUEST FOR ADD SUBJECT -----------------------------
-app.post('/addsubject',function(req,res){
+// app.post('/addsubject',function(req,res){
 
-    subjects.create({
-        sub_code : req.body.sub_name,
-        sub_name : req.body.sub_code,
-        date_of_exam : req.body.date_of_exam
-    }).then((createdsubject)=>{
-        res.send('Success');
-    });
+//     subjects.create({
+//         sub_code : req.body.sub_name,
+//         sub_name : req.body.sub_code,
+//         date_of_exam : req.body.date_of_exam
+//     }).then((createdsubject)=>{
+//         res.send('Success');
+//     });
 
-});
+// });
 
 
 //-----------------------------POST REQUEST FOR ADD QUESTION -----------------------------
-app.post('/addques',function(req,res){
+// app.post('/addques',function(req,res){
    
-    questions.create({
-        sub_code : req.body.sub_code,
-        question : req.body.ques,
-        option1 : req.body.op1,
-        option2 : req.body.op2,
-        option3 : req.body.op3,
-        option4 : req.body.op4,
-        answer : req.body.ans
-    }).then((createdQues)=>{
-        console.log(createdQues);
-        res.redirect('/successques');
-    });
+//     questions.create({
+//         sub_code : req.body.sub_code,
+//         question : req.body.ques,
+//         option1 : req.body.op1,
+//         option2 : req.body.op2,
+//         option3 : req.body.op3,
+//         option4 : req.body.op4,
+//         answer : req.body.ans
+//     }).then((createdQues)=>{
+//         console.log(createdQues);
+//         res.redirect('/successques');
+//     });
 
-});
-
-
-//-----------------------------POST REQUEST FOR UPDATE QUESTION -----------------------------
-app.post('/updateques',function(req,res){
-    let msg = 'Failure';
-    questions.findOne({
-        where : {
-            sub_code : req.body.sub_code,
-            id : req.body.id
-        }
-    }).then((ques)=>{
-        if(ques){
-            msg = 'Success';
-            ques.update({
-                question : req.body.question,
-                option1 : req.body.option1,
-                option2 : req.body.option2,
-                option3 : req.body.option3,
-                option4 : req.body.option4
-            })
-        }
-        else{
-            //No Such Question Found
-        }
-        res.send(msg);
-    })
-});
+// });
 
 
-//-----------------------------POST REQUEST FOR DELETE QUESTION -----------------------------
-app.post('/deleteques',function(req,res){
-    questions.destroy({
-        where : {
-            id : req.body.id,
-            sub_code : req.body.sub_code
-        }
-    });
-    res.send('Success');
-});
+// //-----------------------------POST REQUEST FOR UPDATE QUESTION -----------------------------
+// app.post('/updateques',function(req,res){
+//     let msg = 'Failure';
+//     questions.findOne({
+//         where : {
+//             sub_code : req.body.sub_code,
+//             id : req.body.id
+//         }
+//     }).then((ques)=>{
+//         if(ques){
+//             msg = 'Success';
+//             ques.update({
+//                 question : req.body.question,
+//                 option1 : req.body.option1,
+//                 option2 : req.body.option2,
+//                 option3 : req.body.option3,
+//                 option4 : req.body.option4
+//             })
+//         }
+//         else{
+//             //No Such Question Found
+//         }
+//         res.send(msg);
+//     })
+// });
+
+
+// //-----------------------------POST REQUEST FOR DELETE QUESTION -----------------------------
+// app.post('/deleteques',function(req,res){
+//     questions.destroy({
+//         where : {
+//             id : req.body.id,
+//             sub_code : req.body.sub_code
+//         }
+//     });
+//     res.send('Success');
+// });
 
 
 //-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
-app.post('/viewexam',function(req,res){
+// app.post('/viewexam',function(req,res){
 
-    questions.findAll({
-        where : {
-            sub_code : req.body.sub_code
-        } 
-    }).then((ques_list)=>{
-        res.send(ques_list);
-    });
-});
+//     questions.findAll({
+//         where : {
+//             sub_code : req.body.sub_code
+//         } 
+//     }).then((ques_list)=>{
+//         res.send(ques_list);
+//     });
+// });
 
-//-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
-app.post('/lockexam',function(req,res){
+// //-----------------------------POST REQUEST FOR VIEW QUESTION -----------------------------
+// app.post('/lockexam',function(req,res){
 
-    let col = [];
+//     let col = [];
 
-    questions.findAll({
-        where : {
-            sub_code : req.body.sub_code
-        }
-    }).then((ques_list)=>{
-        console.log(ques_list.length);
-        ques_list.forEach((q)=>{
-            let id = (q.dataValues).id;
-            let obj = {
-                header : id,
-                key : id,
-                width : 10
-            }
-            col.push(obj);
-        })
-    })
+//     questions.findAll({
+//         where : {
+//             sub_code : req.body.sub_code
+//         }
+//     }).then((ques_list)=>{
+//         console.log(ques_list.length);
+//         ques_list.forEach((q)=>{
+//             let id = (q.dataValues).id;
+//             let obj = {
+//                 header : id,
+//                 key : id,
+//                 width : 10
+//             }
+//             col.push(obj);
+//         })
+//     })
 
-    var newsubject_sheet = workbook.addWorksheet(req.body.sub_code);
-    newsubject_sheet.columns = col;
+//     var newsubject_sheet = workbook.addWorksheet(req.body.sub_code);
+//     newsubject_sheet.columns = col;
 
-    var filename = "Responses.xlsx";
-    workbook.xlsx.writeFile(filename).then(()=>{
-        // callback(null);
-        console.log('Success');
-    }).catch((err)=>{
-        console.log(err);
-    });
+//     var filename = "Responses.xlsx";
+//     workbook.xlsx.writeFile(filename).then(()=>{
+//         // callback(null);
+//         console.log('Success');
+//     }).catch((err)=>{
+//         console.log(err);
+//     });
 
 
-});
+// });
 
 
 //-----------------------------POST REQUEST FOR VIEW MARKS LIST -----------------------------
-app.post('/markslist',function(req,res){
+// app.post('/markslist',function(req,res){
 
-    marks.findAll({
-        where : {
-            sub_code : req.body.sub_code
-        } 
-    }).then((val)=>{
-        res.send(val);
-    });
-});
+//     marks.findAll({
+//         where : {
+//             sub_code : req.body.sub_code
+//         } 
+//     }).then((val)=>{
+//         res.send(val);
+//     });
+// });
 
 
 //-----------------------------POST REQUEST FOR VIEW MARKS -----------------------------
-app.post('/getmarks',function(req,res){
-    marks.findOne({
-        where : {
-            sub_code : req.body.sub_code,
-            username : req.user.username
-        }
-    }).then((val)=>{
-        res.send(val);
-    })
-})
+// app.post('/getmarks',function(req,res){
+//     marks.findOne({
+//         where : {
+//             sub_code : req.body.sub_code,
+//             username : req.user.username
+//         }
+//     }).then((val)=>{
+//         res.send(val);
+//     })
+// })
 
 
-//-----------------------------POST REQUEST FOR CHECK ATTEMPT -----------------------------
-app.post('/checkattempt',function(req,res){
-    marks.findOne({
-        where : {
-            sub_code : req.body.sub_code,
-            username : req.user.username
-        }
-    }).then((val)=>{
-        if(val){
-            res.send("Yes");
-        }
-        else{
-            res.send("No");
-        }
-    })
-})
+// //-----------------------------POST REQUEST FOR CHECK ATTEMPT -----------------------------
+// app.post('/checkattempt',function(req,res){
+//     marks.findOne({
+//         where : {
+//             sub_code : req.body.sub_code,
+//             username : req.user.username
+//         }
+//     }).then((val)=>{
+//         if(val){
+//             res.send("Yes");
+//         }
+//         else{
+//             res.send("No");
+//         }
+//     })
+// })
 
 
-//-----------------------------POST REQUEST FOR SUBMIT EXAM -----------------------------
-app.post('/submitexam',function(req,res){
+// //-----------------------------POST REQUEST FOR SUBMIT EXAM -----------------------------
+// app.post('/submitexam',function(req,res){
 
-    let m = calculate_and_update_marks(req.body,req.user);
-    //console.log("Marks Obtained = " + m);
+//     let m = calculate_and_update_marks(req.body,req.user);
+//     //console.log("Marks Obtained = " + m);
 
-    res.redirect('/student');
+//     res.redirect('/student');
 
-});
-
-
-//-----------------------------POST REQUEST FOR SUBMIT EXAM -----------------------------
-app.post('/changemarks',function(req,res) {
-    let msg = 'Failure';
-    marks.findOne({
-        where : {sub_code : req.body.sub_code,username : req.body.username}
-    }).then((record)=>{
-            if(record){
-                msg = 'Success';
-                record.update({
-                    marks_given : req.body.newmarks
-                })
-            }
-            else{
-                //No Such Record Found
-            }
-            res.send(msg);
-        });
-});
+// });
 
 
-//----------------------------- POST REQUEST FOR SIGN UP -----------------------------
-app.post('/signup',(req,res)=>{
-    users.create({
-        username : req.body.username,
-        password : req.body.password
-    }).then((createdUser)=>{
-        console.log('User created Successfully');
-        res.redirect('/login');
-    });
-});
+// //-----------------------------POST REQUEST FOR SUBMIT EXAM -----------------------------
+// app.post('/changemarks',function(req,res) {
+//     let msg = 'Failure';
+//     marks.findOne({
+//         where : {sub_code : req.body.sub_code,username : req.body.username}
+//     }).then((record)=>{
+//             if(record){
+//                 msg = 'Success';
+//                 record.update({
+//                     marks_given : req.body.newmarks
+//                 })
+//             }
+//             else{
+//                 //No Such Record Found
+//             }
+//             res.send(msg);
+//         });
+// });
 
 
-//----------------------------- POST REQUEST FOR LOGIN -----------------------------
-app.post('/login',passport.authenticate('local',{failureRedirect : '/login'}),function(req,res){
-    return res.redirect('/' + req.user.category);
-});
+// //----------------------------- POST REQUEST FOR SIGN UP -----------------------------
+// app.post('/signup',(req,res)=>{
+//     users.create({
+//         username : req.body.username,
+//         password : req.body.password
+//     }).then((createdUser)=>{
+//         console.log('User created Successfully');
+//         res.redirect('/login');
+//     });
+// });
 
 
-//----------------------------- GET REQUEST FOR PROFILE -----------------------------
-app.get('/profile',function(req,res){
-    res.send(req.user);
-});
+// //----------------------------- POST REQUEST FOR LOGIN -----------------------------
+// app.post('/login',passport.authenticate('local',{failureRedirect : '/login'}),function(req,res){
+//     return res.redirect('/' + req.user.category);
+// });
+
+
+// //----------------------------- GET REQUEST FOR PROFILE -----------------------------
+// app.get('/profile',function(req,res){
+//     res.send(req.user);
+// });
 
 
 //----------------------------- GET REQUEST FOR LOGOUT -----------------------------
-app.get('/logout',function(req,res){
-    console.log("Logging Out " + req.user.username);
-    req.logout();
-    res.send('Success');
-});
+// app.get('/logout',function(req,res){
+//     console.log("Logging Out " + req.user.username);
+//     req.logout();
+//     res.send('Success');
+// });
 
 
 //-----------------------------SERVER START -----------------------------
@@ -285,38 +283,38 @@ app.listen(1001,()=>{
     console.log('Server started at http://localhost:1001/');
 });
 
-function calculate_and_update_marks(obj,student){
-    // for(key in obj){
-    //     console.log(key + " --> " + obj[key]);
-    // } 
-    let total_marks = 0;
+// function calculate_and_update_marks(obj,student){
+//     // for(key in obj){
+//     //     console.log(key + " --> " + obj[key]);
+//     // } 
+//     let total_marks = 0;
 
-    questions.findAll({
-        where : {
-            sub_code : obj.sub_code
-        }
-    }).then((data)=>{
+//     questions.findAll({
+//         where : {
+//             sub_code : obj.sub_code
+//         }
+//     }).then((data)=>{
         
-        data.forEach((q) => {
-            console.log(q["id"] + "//" + q["answer"] + "//" + obj[q["id"]]);
-            if(q["answer"] === obj[q["id"]]){
-                total_marks+=1;
-            }
-        });
-        total_marks*=4;
-        console.log("Returning marks are ",total_marks)
-        let user = student.username;
-        let code = obj.sub_code;
+//         data.forEach((q) => {
+//             console.log(q["id"] + "//" + q["answer"] + "//" + obj[q["id"]]);
+//             if(q["answer"] === obj[q["id"]]){
+//                 total_marks+=1;
+//             }
+//         });
+//         total_marks*=4;
+//         console.log("Returning marks are ",total_marks)
+//         let user = student.username;
+//         let code = obj.sub_code;
 
-        marks.create({
-            sub_code : code,
-            username : user,
-            marks_given : total_marks
-        }).then((info)=>{
-            console.log('Exam Attempted Successfully!');
-            console.log("Marks Alloted : " + total_marks + " For Roll No. " + user);
-        });
-        return total_marks;
+//         marks.create({
+//             sub_code : code,
+//             username : user,
+//             marks_given : total_marks
+//         }).then((info)=>{
+//             console.log('Exam Attempted Successfully!');
+//             console.log("Marks Alloted : " + total_marks + " For Roll No. " + user);
+//         });
+//         return total_marks;
 
-    });
-}
+//     });
+// }
