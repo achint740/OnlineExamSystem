@@ -5,15 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <title>Main Page</title>
 </head>
 <body>
-    <h1>Online Examination System</h1>
-    <div>
-        <span id="dot1"><a href="Teachers/index.html"><h2>TEACHER</h2></a></span>
-        <span id="dot2"><a href="Student/index.html"><h2>STUDENT</h2></a></span>
-        <span id="dot3"><a href="Admin/index.html"><h2>ADMIN</h2></a></span>
+    <nav class="navbar navbar-expand-sm -50 bg-dark fixed-top">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- // ---------------------------------------------  System Name ------------------------------------------------- // -->
+            <ul class="navbar-nav mr-auto">
+                <li id="dtu"><h3>Online Examination System</h3></li>
+            </ul>
+
+      <!-- // --------------------------------------------- BUTTONS ------------------------------------------------- // -->
+            <ul class="navbar-nav  float-xs-right">
+
+      <!-- // --------------------------------------------- HOME ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="home" href="index.html">Home</a>
+                </li> 
+
+      <!-- // --------------------------------------------- ABOUT US ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="abt" href="#">About Us</a>
+                </li>
+
+      <!-- // --------------------------------------------- ADMIN ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="Admin/index.html">Admin</a>
+                </li>
+
+       <!-- // --------------------------------------------- TEACHERS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="Teachers/index.html">Teacher</a>
+                </li>     
+        
+        <!-- // --------------------------------------------- STUDENTS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="Student/index.html">Student</a>
+                </li>  
+
+      <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
+              <li class="nav-item active">
+                  <a id="login123" class="nav-link xyz" href="../../Login/index.html">Login</a>
+              </li> 
+            </ul>
+        </div>
+    </nav>
+
+    <!-- // --------------------------------------------- NAV BAR ENDS ------------------------------------------------- // -->
+    
+    <div class="container m-6 text-center">
+        <div class="row ">
+
+            <div class="card" style="width: 16rem;">
+                <img src="Images/admin.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Card title</h5> -->
+                    <p class="card-text">Idiots emit bogons, causing machinery to malfunction in their presence! <br>   
+                        System Administrators absorb bogons absorb bogons, letting machinery work again
+                    </p>
+                    <a href="Login/index.html" class="btn btn-primary">Admin</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 16rem;">
+                <img src="Images/teacher.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Teacher</h5> -->
+                    <p class="card-text">
+                        T - Talented<br>
+                        &nbsp;  E - Education<br>
+                        A - Attitude<br>
+                        &nbsp; C - Character<br>
+                        &nbsp;H - Harmony<br>
+                        E - Efficient<br>
+                        R - Relation
+                    </p>
+                    <a href="Login/index.html" class="btn btn-primary">Teacher</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 16rem;">
+                <img src="Images/StudentImg.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Student</h5> -->
+                    <p class="card-text">Trust Youself! You know more than you think you do<br>Let your hardwork propel you to a speed so fast that
+                        Good Luck has no choice but to ride with a winner like you!</p>
+                    <a href="Login/index.html" class="btn btn-primary">Student</a>
+                </div>
+            </div>  
+
+        </div>
     </div>
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
     crossorigin="anonymous"></script>
     <!-- <script>

@@ -1,49 +1,95 @@
 body{
-    background-image: url('./Images/FR1.png');
+    background-image: url('./Images/Mac.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
 }
 
-h1{
-    font-family: 'Changa', sans-serif;
+.card{
     text-align: center;
-    font-size: 70px;
+    margin-top: 250px;
+    margin-left: 100px;
+    background-color: blanchedalmond;
+    border: 2px solid black;
+    border-radius: 30px;
 }
 
-#dot1{
+.card-body{
+    background-color: rgb(248, 245, 221);
+    height: 250px;
+    /* font-weight: 300; */
+    /* color: rgb(82, 21, 139); */
+}
+
+img{
     height: 200px;
-    width: 200px;
-    background-color: rgb(219, 12, 12);
-    border-radius: 50%;
-    display: inline-block;
-    margin-right : 50px;
-    margin-top: 100px;
 }
 
-h2{
-text-align : center;
-margin-top : 80px;
-color: black
+/*----------------------------------------------Styling For NAV STARTS-------------------------------------------- */
+
+li{
+    padding-left: 10px;
+    font-size: 20px;
+}
+                
+nav{
+    height: 60px;
 }
 
-#dot2{
-    height: 200px;
-    width: 200px;
-    background-color: rgb(213, 231, 48);
-    border-radius: 50%;
-    display: inline-block;
-    margin-right : 50px;
-    margin-top: 100px;
+#dtu{
+    margin-top: 10px; 
+    color: cyan;  
 }
 
-#dot3{
-    height: 200px;
-    width: 200px;
-    background-color: rgb(44, 223, 28);
-    border-radius: 50%;
-    display: inline-block;
-    margin-top: 100px;
-}
-
-div{
+.xyz
+{
     text-align: center;
+    font-size: 20px;
+    color: white;
 }
+
+.xyz1{
+    text-align: center;
+    font-size: 18px;
+    color: wheat;
+}
+
+ .xyz:hover{
+    text-decoration-color: aqua;
+    color: rgb(120, 219, 226);
+    font-size: 24px;
+} 
+
+ 
+.dropdown 
+{
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown-content 
+{
+    display: none;
+    position: absolute;
+    background-color: #161616;
+    font-size: 17px;
+    min-width: 150px;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    z-index: 1;
+}
+  
+.dropdown-content a 
+{
+    color:white;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+}
+  
+.dropdown-content a:hover 
+{
+    background-color: rgb(65, 63, 63);
+}
+  
+.dropdown:hover .dropdown-content {display: block;}   
