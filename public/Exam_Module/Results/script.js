@@ -67,8 +67,9 @@ function refresh(){
 
             var action = document.createElement("td");
             var action_btn = document.createElement("button");
-            action_btn.textContent = "CHANGE";
-            action_btn.className = "change";
+            action_btn.textContent = "Change";
+            // action_btn.className = "change";
+            action_btn.classList = ["btn","btn-primary","change"];
             action_btn.addEventListener("click",function(){
                 // alert('Clicked');
                 let roll = this.parentElement.parentElement.children[1].innerHTML;

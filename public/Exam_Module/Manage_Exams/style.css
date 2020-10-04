@@ -1,0 +1,144 @@
+body, html {
+    height: 100%;
+}
+
+.bg-image {
+    /* The image used */
+    background-image: url('../../Images/library.jpg');
+  
+    /* Add the blur effect */
+    filter: blur(3px);
+    -webkit-filter: blur(2.5px);
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 60%;
+    padding: 20px;
+    text-align: center;
+}
+
+#heading{
+    color: black;
+    font-family: 'Sansita Swashed', cursive;
+    font-size: 35px;
+}
+
+p{
+    color: black;
+}
+
+input{
+    height: 40px;
+    width: 142px;
+    text-align: center;
+}
+
+.card{
+    text-align: center;
+    /* margin-top: 250px; */
+    margin-left: 70px;
+    /* background-color: rgb(161, 114, 43) */
+    /* background: inherit; */
+    border: 2px solid black;
+    border-radius: 30px;
+}
+
+.card-body{
+    background-color: rgb(157, 219, 171);
+    /* background: inherit; */
+    height: 280px;
+    /* font-weight: 300; */
+    /* color: rgb(82, 21, 139); */
+}
+
+/*----------------------------------------------Styling For NAV STARTS-------------------------------------------- */
+
+li{
+    padding-left: 10px;
+    font-size: 20px;
+}
+                
+nav{
+    height: 60px;
+}
+
+#dtu{
+    margin-top: 10px; 
+    color: cyan;  
+}
+
+.xyz
+{
+    text-align: center;
+    font-size: 30px;
+    color: rgb(175, 207, 29);
+    font-weight: 500;
+}
+
+.xyz1{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: wheat;
+}
+
+ .xyz:hover{
+    text-decoration-color: aqua;
+    color: rgb(120, 219, 226);
+    font-size: 24px;
+} 
+
+ 
+.dropdown 
+{
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown-content 
+{
+    display: none;
+    position: absolute;
+    background-color: #161616;
+    font-size: 17px;
+    min-width: 150px;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    z-index: 1;
+}
+  
+.dropdown-content a 
+{
+    color:white;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+}
+  
+.dropdown-content a:hover 
+{
+    background-color: rgb(65, 63, 63);
+}
+  
+.dropdown:hover .dropdown-content {display: block;}   
+
+/* .row {
+    bac
+} */

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital@1&family=Sansita+Swashed:wght@500&family=Satisfy&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Edit Score</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm -50 fixed-top">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- // ---------------------------------------------  Name ------------------------------------------------- // -->
+            <ul class="navbar-nav mr-auto">
+                <li id="dtu"><h3>RESULTS</h3></li>
+            </ul>
+
+      <!-- // --------------------------------------------- BUTTONS ------------------------------------------------- // -->
+            <ul class="navbar-nav  float-xs-right">
+
+      <!-- // --------------------------------------------- HOME ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="home" href="#">Home</a>
+                </li> 
+
+      <!-- // --------------------------------------------- EXAMS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="abt" href="../Manage_Exams/index.html">Exams</a>
+                </li>
+
+      <!-- // --------------------------------------------- QUESTIONS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Questions/index.html">Questions</a>
+                </li>
+
+       <!-- // --------------------------------------------- RESULTS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="index.html">Results</a>
+                </li>     
+
+      <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
+              <li class="nav-item active">
+                  <a id="login123" class="nav-link xyz" href="#">Logout</a>
+              </li> 
+            </ul>
+        </div>
+    </nav>
+
+    <div id="inp1">
+        
+        <h1>Enter Subject Code : </h1>  <br>
+        <input id="sub_code" type="text">
+
+        <button id="showtable">Show Marks</button>
+
+    </div>
+
+        <table id="markstable">
+            <tr>
+                <th>Sr. No.  </th>
+                <th>Roll No. </th>
+                <th>Marks Given</th>
+                <th>New Marks</th>
+                <th>Action</th>
+            </tr>
+
+        </table>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+    crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

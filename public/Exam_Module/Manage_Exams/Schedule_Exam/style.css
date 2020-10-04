@@ -13,7 +13,7 @@ input{
 }
 
 body{
-    background-image: url('../Img/create_exam.jpg');
+    background-image: url('../../Img/create_exam.jpg');
     background-size: cover;
 }
 
