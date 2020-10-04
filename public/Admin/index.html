@@ -4,21 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>ADMIN</h1>
 
-    <button><a href="../Exam_Module/Schedule_Exam/index.html">Schedule Examinations</a></button>
+    <nav class="navbar navbar-expand-sm -50 fixed-top">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <button><a href="../Exam_Module/View_Edit_Delete_Questions/index.html">View Exam Paper & Edit/Delete Questions</a></button>
+      <!-- // ---------------------------------------------  System Name ------------------------------------------------- // -->
+            <ul class="navbar-nav mr-auto">
+                <li id="dtu"><h3>ADMIN</h3></li>
+            </ul>
 
-    <button><a href="../Exam_Module/Add_Question/index.html">Add Questions</a></button>
+      <!-- // --------------------------------------------- BUTTONS ------------------------------------------------- // -->
+            <ul class="navbar-nav  float-xs-right">
 
-    <button><a href="../Exam_Module/Edit_Results/index.html">Edit Results</a></button>
+      <!-- // --------------------------------------------- HOME ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="home" href="../index.html">Home</a>
+                </li> 
 
-    <button><a href="../Student/index.html">Test a Created Exam</a></button>
+      <!-- // --------------------------------------------- EXAM SECTION ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Exam_Module/index.html">Exams</a>
+                </li>
 
-    <button id="logout_btn">Logout</button>
+       <!-- // --------------------------------------------- QUESTIONS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Exam_Module/index.html">Questions</a>
+                </li>     
+        
+        <!-- // --------------------------------------------- RESULTS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Exam_Module/index.html">Results</a>
+                </li>  
+
+      <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
+              <li class="nav-item active">
+                  <a id="login123" class="nav-link xyz" href="#">Logout</a>
+              </li> 
+            </ul>
+        </div>
+    </nav>
+
+    <div id="intro">
+        <h1>Admin Section</h1>  <br>
+        <h3>Handle all things in one place</h3>
+        <h3>Start by Scheduling an Exam</h3> <br>
+        
+    </div>
+
+    <button id="startbtn">Start</button>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
     crossorigin="anonymous"></script>
