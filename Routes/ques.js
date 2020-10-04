@@ -1,7 +1,6 @@
 const route = require('express').Router(); 
 const questions = require('../db').quesDB;
 
-
 //-----------------------------POST REQUEST FOR ADD QUESTION -----------------------------
 route.post('/add',function(req,res){
    

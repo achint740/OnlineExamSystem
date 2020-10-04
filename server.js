@@ -37,7 +37,7 @@ app.use('/student',exp.static(__dirname + '/public/Student'));
 
 
 //-----------------------------LOAD SITE ON REQUEST TO '/successques' -----------------------------
-app.use('/successques',exp.static(__dirname + '/public/Exam_Module/Ques_Success'));
+app.use('/successques',exp.static(__dirname + '/public/Exam_Module/Questions'));
 
 
 //-----------------------------LOAD SITE ON REQUEST TO '/login' -----------------------------
