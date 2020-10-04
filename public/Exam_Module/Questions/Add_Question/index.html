@@ -5,30 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>Add Question</title>
 </head>
 <body>
 
+    <nav class="navbar navbar-expand-sm -50 fixed-top">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- // ---------------------------------------------  PORTAL Name ------------------------------------------------- // -->
+            <ul class="navbar-nav mr-auto">
+                <li id="dtu"><h3>MANAGE QUESTIONS</h3></li>
+            </ul>
+
+      <!-- // --------------------------------------------- BUTTONS ------------------------------------------------- // -->
+            <ul class="navbar-nav  float-xs-right">
+
+      <!-- // --------------------------------------------- HOME ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="home" href="#">Home</a>
+                </li> 
+
+      <!-- // --------------------------------------------- ABOUT US ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="abt" href="../../Manage_Exams/index.html">Exams</a>
+                </li>
+
+      <!-- // --------------------------------------------- ADMIN ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../index.html">Questions</a>
+                </li>
+
+       <!-- // --------------------------------------------- TEACHERS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../../Results/index.html">Results</a>
+                </li>     
+
+      <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
+              <li class="nav-item active">
+                  <a id="login123" class="nav-link xyz" href="#">Logout</a>
+              </li> 
+            </ul>
+        </div>
+    </nav>
+
     <h1>Add a New Question</h1>
 
     <form method="POST" action="/ques/add">
-        <span id="one">Subject Code :  </span><input type="text" name="sub_code" required>
+        <span class="one">Subject Code :  </span><input type="text" name="sub_code" required>
         <br><br>
-        <span id="one">Question : &nbsp;  &nbsp; &nbsp;  </span><input type="text" name="ques" required>
+        <span class="one">Question : &nbsp;  &nbsp; &nbsp;  </span><input type="text" name="ques" required>
         <br><br>
-        <span id="one"> Option A : &nbsp;  &nbsp; &nbsp;  </span>   <input type="text" name="op1" required    >
+        <span class="one"> Option A : &nbsp;  &nbsp; &nbsp;  </span>   <input type="text" name="op1" required    >
         <br><br>
-        <span id="one">Option B :  &nbsp;  &nbsp; &nbsp;   </span><input type="text" name="op2" required    >
+        <span class="one">Option B :  &nbsp;  &nbsp; &nbsp;   </span><input type="text" name="op2" required    >
         <br><br>
-        <spane id="one">Option C : &nbsp;  &nbsp; &nbsp; </spane><input type="text" name="op3"  required   >
+        <spane class="one">Option C : &nbsp;  &nbsp; &nbsp; </spane><input type="text" name="op3"  required   >
         <br><br>
-        <span id="one">Option D :   &nbsp;  &nbsp; &nbsp;</span><input type="text" name="op4"  required   > 
+        <span class="one">Option D :   &nbsp;  &nbsp; &nbsp;</span><input type="text" name="op4"  required   > 
         <br><br>
-        <span id="one">Correct Ans : &nbsp; </span><input type="text" name="ans"  required   >
+        <span class="one">Correct Ans : &nbsp; </span><input type="text" name="ans"  required   >
         <br><br>
         <button type="submit" class="btn btn-success">ADD</button>
     </form>
+
+    <h2>*Note : You would be redirected to "Manage Questions" after successfull addition of the question</h2>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
     crossorigin="anonymous"></script>

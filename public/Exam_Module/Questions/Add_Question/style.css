@@ -1,6 +1,6 @@
 body{
     text-align: center;
-    background-image: url('../Img/ques.jpg');
+    background-image: url('../../Img/ques.jpg');
     background-size: cover;
     color: white;
 }
@@ -9,7 +9,7 @@ form{
     margin-top: 100px;
 }
 
-#one{
+.one{
     font-size: 30px;
 }
 
@@ -24,3 +24,40 @@ input{
 button{
     margin-left: 450px;
 }
+
+h2{
+    color: red;
+}
+
+li{
+    padding-left: 10px;
+    font-size: 20px;
+}
+                
+nav{
+    height: 60px;
+}
+
+#dtu{
+    margin-top: 10px; 
+    color: cyan;  
+}
+
+.xyz
+{
+    text-align: center;
+    font-size: 20px;
+    color: white;
+}
+
+.xyz1{
+    text-align: center;
+    font-size: 18px;
+    color: wheat;
+}
+
+ .xyz:hover{
+    text-decoration-color: aqua;
+    color: rgb(120, 219, 226);
+    font-size: 24px;
+} 

@@ -33,7 +33,7 @@ $('#viewexam').on('click',()=>{
             
             //QUESTION
             var para = document.createElement("p");
-            var q = document.createTextNode(ques["question"]);
+            var q = document.createTextNode("Q" + ques["id"] + " " + ques["question"]);
             para.appendChild(q);
             para.contentEditable = "true";
             para.id = ques["id"];
