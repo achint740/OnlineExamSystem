@@ -8,15 +8,37 @@ route.use(passport.initialize());
 route.use(passport.session());
 
 
-//----------------------------- POST REQUEST FOR SIGN UP -----------------------------
-route.post('/signup',(req,res)=>{
+//----------------------------- POST REQUEST FOR ADD USER -----------------------------
+route.post('/add',(req,res)=>{
     users.create({
         username : req.body.username,
-        password : req.body.password
+        password : req.body.password,
+        category : req.body.category
     }).then((createdUser)=>{
-        console.log('User created Successfully');
-        res.redirect('/login');
+        res.send('Success');
     });
+});
+
+
+//----------------------------- POST REQUEST FOR DELETE USER -----------------------------
+route.post('/delete',(req,res)=>{
+    users.findOne({
+        where  : {
+            username : req.body.username
+        }
+    }).then((user)=>{
+        if(user){
+            users.destroy({
+                where : {
+                    username : req.body.username
+                }
+            });
+            res.send('Success! User Deleted');
+        }
+        else{
+            res.send('Failure! No Such User');
+        }
+    })
 });
 
 

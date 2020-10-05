@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Manage Users</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm -50 fixed-top">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- // ---------------------------------------------  System Name ------------------------------------------------- // -->
+            <ul class="navbar-nav mr-auto">
+                <li id="dtu"><h3>MANAGE USERS</h3></li>
+            </ul>
+
+      <!-- // --------------------------------------------- BUTTONS ------------------------------------------------- // -->
+            <ul class="navbar-nav  float-xs-right">
+
+      <!-- // --------------------------------------------- HOME ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="home" href="../index.html">Home</a>
+                </li> 
+
+      <!-- // --------------------------------------------- EXAM SECTION ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Exam_Module/Manage_Exams/index.html">Exams</a>
+                </li>
+
+       <!-- // --------------------------------------------- QUESTIONS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Exam_Module/Questions/index.html">Questions</a>
+                </li>     
+        
+        <!-- // --------------------------------------------- RESULTS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Exam_Module/Results/index.html">Results</a>
+                </li>  
+        
+        <!-- // --------------------------------------------- RESULTS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Manage_Users/index.html">Manage Users</a>
+                </li>  
+
+      <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
+              <li class="nav-item active">
+                  <a id="login123" class="nav-link xyz" href="#">Logout</a>
+              </li> 
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container m-6 text-center">
+        <div class="row ">
+
+            <div class="card" style="width: 17rem;">
+                <div class="card-body">
+                    <h1 id="heading">Add User</h1>
+                    <p>Enter the username along with a Temporary password and add the user to database<br>
+                    It's just a click away!</p>
+                    <input type="text" placeholder="Username" id="userid0"> <br><br>
+                    <input type="password" placeholder="Temporary Password" id="temp_pass"> <br><br>
+                    <select id="category">
+                        <option>Category</option>
+                        <option>student</option>
+                        <option>teacher</option>
+                    </select>
+                    <a class="btn btn-primary" onclick="add()">ADD</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 17rem;">
+                <div class="card-body">
+                    <h1 id="heading">Edit User</h1>
+                    <p>Enter User ID of the user whose details are to be edited!<br>
+                        Change them and click the Edit button.
+                    </p>
+                    <input type="text" placeholder="Username" id="userid1">
+                    <div id="details">
+                        
+                    </div> 
+                    <br><br>
+                    <a class="btn btn-primary" onclick="edit()">Submit</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 17rem;">
+                <div class="card-body">
+                    <h1 id="heading">Delete User</h1>
+                    <p>Enter User ID of the user who is to be deleted and click the Delete button.<br>
+                        Caution : The user will be permanently deleted!<br>
+                    </p>
+                    <input type="text" placeholder="Username" id="userid2"> <br><br>
+                    <a class="btn btn-primary" onclick="deleteuser();">DELETE</a>
+                </div>
+            </div>  
+
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+    crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
