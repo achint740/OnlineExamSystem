@@ -3,6 +3,8 @@ $(document).ready(()=>{
         if(data.username!=undefined){
             console.log("Welcome " + data.username);
             console.log(data.category);
+            $('#roll').html(data.username);
+            // $('.navbar').append("<button id='logout'>Logout</button>");
         }
         else{
             alert("Please Login");
@@ -134,7 +136,7 @@ function setCircleDasharray() {
 
 $('#attemptexam').on('click',()=>{
 
-    let code = $('#sub_code').val();
+    let code = $('#sub_code1').val();
 
     let obj = {
         sub_code : code
@@ -159,15 +161,15 @@ $('#getmarks').on('click',()=>{
     $('#three').show();
 
     let obj = {
-        sub_code : $('#sub_code').val()
+        sub_code : $('#sub_code2').val()
     }
 
     $.post('/marks/my',obj,(data)=>{
         //var marks = document.createTextNode(data.dataValues.marks_given);
         var m = document.createTextNode(data.marks_given);
-        // console.log(data.marks_given);
+        console.log(data);
         document.getElementById('myscore').appendChild(m);
-    })
+    });
 })
 
 function load_exam(obj){

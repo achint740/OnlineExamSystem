@@ -5,16 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="one">
-        <h1>Student</h1>
+    <nav class="navbar navbar-light">
+        <span class="navbar-brand mb-0 h1" id="mynav">Student</span>
+        <h5 id="roll">Hello</h5>
+    </nav>
 
-        Subject Code : <input type="text" id="sub_code">
-        <button id="attemptexam">Attempt Examination</button>
+    <div id="one" class="container m-4 text-center">
+        <div class="row ">
 
-        <button id="getmarks">View Score</button>
+            <div class="card" style="width: 16rem;">
+                <img src="./Img/ready.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Card title</h5> -->
+                    <p class="card-text">
+                        Believe in yourself and all that you are. <br>
+                        Know that there is something inside you that is greater than any obstacle!
+                    </p>
+                    <input id="sub_code1" type="text" placeholder="Subject Code"> 
+                    <a id="attemptexam" class="btn btn-primary">Attempt</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 16rem;">
+                <img src="./Img/marks.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Student</h5> -->
+                    <p class="card-text">
+                        Marks don't matter in the long run <br>
+                        But your inner ability leads you to the world of success!
+                        -Vainkatesh Singh
+                    </p>
+                    <input id="sub_code2" type="text" placeholder="Subject Code"> 
+                    <a id="getmarks" class="btn btn-primary">View</a>
+                </div>
+            </div>  
+
+        </div>
     </div>
 
     <form id="two" action="/exam/submit" method="POST">
@@ -22,8 +56,6 @@
         <div id="app"></div>
 
         <h1>Exam For : </h1>
-
-
 
     </form>
 
