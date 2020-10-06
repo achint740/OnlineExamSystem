@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -24,7 +25,7 @@
 
       <!-- // --------------------------------------------- HOME ------------------------------------------------- // -->
                 <li class="nav-item active">
-                    <a class="nav-link xyz" id="home" href="../index.html">Home</a>
+                    <a class="nav-link xyz" id="home" href="/admin">Home</a>
                 </li> 
 
       <!-- // --------------------------------------------- EXAM SECTION ------------------------------------------------- // -->
@@ -44,13 +45,17 @@
         
         <!-- // --------------------------------------------- RESULTS ------------------------------------------------- // -->
                 <li class="nav-item active">
-                    <a class="nav-link xyz" id="Cart" href="../Manage_Users/index.html">Manage Users</a>
+                    <a class="nav-link xyz" id="Cart" href="index.html">Manage Users</a>
                 </li>  
 
       <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
               <li class="nav-item active">
-                  <a id="login123" class="nav-link xyz" href="#">Logout</a>
+                  <a id="login123" class="nav-link xyz">Login</a>
               </li> 
+
+            <li class="nav-item active">
+                <a id="logout" class="nav-link xyz">Logout</a>
+            </li> 
             </ul>
         </div>
     </nav>
@@ -63,14 +68,19 @@
                     <h1 id="heading">Add User</h1>
                     <p>Enter the username along with a Temporary password and add the user to database<br>
                     It's just a click away!</p>
-                    <input type="text" placeholder="Username" id="userid0"> <br><br>
-                    <input type="password" placeholder="Temporary Password" id="temp_pass"> <br><br>
-                    <select id="category">
-                        <option>Category</option>
-                        <option>student</option>
-                        <option>teacher</option>
-                    </select>
-                    <a class="btn btn-primary" onclick="add()">ADD</a>
+                    <input type="text" id="userid0" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" id="temp_pass" class="form-control" placeholder="Temporary Password" aria-label="password" aria-describedby="basic-addon1">
+                    
+                    <div class="input-group">
+                        <select id="category" class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                          <option selected>Category</option>
+                          <option>student</option>
+                          <option>teacher</option>
+                        </select>
+                        <div class="input-group-append">
+                          <button onclick="add();" class="btn btn-primary" type="button">ADD</button>
+                        </div>
+                    </div>  
                 </div>
             </div>
 
@@ -80,12 +90,17 @@
                     <p>Enter User ID of the user whose details are to be edited!<br>
                         Change them and click the Edit button.
                     </p>
-                    <input type="text" placeholder="Username" id="userid1">
-                    <div id="details">
+                    <div id="entrydiv" class="input-group mb-3">
+                        <input type="text" id="userid1" class="form-control" placeholder="Username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" type="button" id="button-addon2">SUBMIT</button>
+                        </div>
+                    </div>
+                    <div id="changediv">
                         
                     </div> 
-                    <br><br>
-                    <a class="btn btn-primary" onclick="edit()">Submit</a>
+                    <!-- <br><br>
+                    <a class="btn btn-primary" onclick="edit()">Submit</a> -->
                 </div>
             </div>
 
@@ -95,8 +110,12 @@
                     <p>Enter User ID of the user who is to be deleted and click the Delete button.<br>
                         Caution : The user will be permanently deleted!<br>
                     </p>
-                    <input type="text" placeholder="Username" id="userid2"> <br><br>
-                    <a class="btn btn-primary" onclick="deleteuser();">DELETE</a>
+                    <div id="entrydiv" class="input-group mb-3">
+                        <input type="text" id="userid1" class="form-control" placeholder="Username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" type="button" id="button-addon2">DELETE</button>
+                        </div>
+                    </div>
                 </div>
             </div>  
 
@@ -105,7 +124,9 @@
     
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
     crossorigin="anonymous"></script>
+    <script src="../Admin/script.js"></script>
     <script src="script.js"></script>
+    
 
 </body>
 </html>

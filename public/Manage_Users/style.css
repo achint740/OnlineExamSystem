@@ -1,7 +1,8 @@
 body{
     height: 100vh;
     width: 100%;
-    background-image: url('./Img/gray.jpg');
+    background-image: url('./Img/m1.jpg');
+    background-size: cover;
     /* background-color: blue; */
 
 }
@@ -11,14 +12,27 @@ body{
     margin-top: 250px;
     margin-left: 100px;
     background-color: blanchedalmond;
-    border: 2px solid black;
     border-radius: 30px;
 }
 
+p{
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+}
+
 .card-body{
-    background-color: rgb(212, 209, 209);
+    /* background-color: black; */
+    background-image: url('./Img/m1.jpg');
+    background-size: 120%;
+    background-position: center;
     height: 400px;
     color: rgb(0, 0, 0);
+}
+
+h1{
+    font-family: 'Libre Baskerville', serif;
+    color: red;
 }
 
 /*----------------------------------------------Styling For NAV STARTS-------------------------------------------- */
@@ -38,7 +52,7 @@ nav{
 
 #dtu{
     margin-top: 10px; 
-    color: cyan;  
+    color:red;  
 }
 
 .xyz
@@ -60,3 +74,10 @@ nav{
     font-size: 24px;
 } 
 
+#temp_pass{
+    margin-top: 10px;
+}
+
+.input-group{
+    margin-top: 10px;
+}

@@ -49,10 +49,15 @@
                     <a class="nav-link xyz" id="Cart" href="Student/index.html">Student</a>
                 </li>  
 
-      <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
-              <li class="nav-item active">
-                  <a id="login123" class="nav-link xyz" href="../../Login/index.html">Login</a>
-              </li> 
+        <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
+                <li class="nav-item active">
+                  <a id="login123" class="nav-link xyz" href="/login">Login</a>
+                </li> 
+
+        <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a id="logout" class="nav-link xyz">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -69,7 +74,7 @@
                     <p class="card-text">Idiots emit bogons, causing machinery to malfunction in their presence! <br>   
                         System Administrators absorb bogons absorb bogons, letting machinery work again
                     </p>
-                    <a href="Login/index.html" class="btn btn-primary">Admin</a>
+                    <a id="admin" class="btn btn-primary">Admin</a>
                 </div>
             </div>
 
@@ -86,7 +91,7 @@
                         E - Efficient<br>
                         R - Relation
                     </p>
-                    <a href="Login/index.html" class="btn btn-primary">Teacher</a>
+                    <a id="teacher" class="btn btn-primary">Teacher</a>
                 </div>
             </div>
 
@@ -96,27 +101,17 @@
                     <!-- <h5 class="card-title">Student</h5> -->
                     <p class="card-text">Trust Youself! You know more than you think you do<br>Let your hardwork propel you to a speed so fast that
                         Good Luck has no choice but to ride with a winner like you!</p>
-                    <a href="Login/index.html" class="btn btn-primary">Student</a>
+                    <a id="student" class="btn btn-primary">Student</a>
                 </div>
             </div>  
 
         </div>
     </div>
 
+    <!-- <button id="fst">FST</button> -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
     crossorigin="anonymous"></script>
-    <!-- <script>
-        $.get('/profile',(data)=>{
-            if(data.username==undefined){
-                alert('Please Login');
-                document.location.href = '/login';
-            }
-            else{
-                console.log("Welcome " + data.username);
-                console.log(data.category);
-            }
-        });
-    </script> -->
+    <script src="script.js"></script>
 </body>
 </html>

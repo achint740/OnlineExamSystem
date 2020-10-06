@@ -1,4 +1,5 @@
 $(()=>{
+    $("#logout").hide();
     $.get('/users/profile',(data)=>{
         if(data.username==undefined){
             alert("Please Login");
@@ -10,7 +11,21 @@ $(()=>{
         }
         else{
             console.log("Welcome " + data.username);
-            console.log(data.category);
+            $('#login123')
+                .text(data.username)
+                .attr("href","#")
+            $("#logout").show();
+        }
+        $("#sub_code").val('');
+        $("#sub_name").val('');
+        $('#dateexam').val('');
+    });
+});
+
+$("#logout").on('click',function(){
+    $.get("/users/logout",(data)=>{
+        if(data=='Success'){
+            document.location.href = '/login';
         }
     });
 });
@@ -22,13 +37,13 @@ $("#create_exam").on('click',()=>{
     let obj = {
         sub_code : $("#sub_code").val(),
         sub_name : $("#sub_name").val(),
-        date_of_exam : $('#dateexam').val(),
+        date_of_exam : $('#dateexam').val()
     };
 
     $.post('/exam/schedule',obj,(data)=>{
         if(data=='Success'){
             alert('Subject Added to Database');
-            //Append a button to be referanced to Add Question Page
+            document.location.href = "../../Questions/index.html";
         }
         else{
             alert('Failure');

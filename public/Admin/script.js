@@ -1,4 +1,5 @@
 $(()=>{
+    $("#logout").hide();
     $.get('/users/profile',(data)=>{
         if(data.username==undefined){
             alert("Please Login");
@@ -10,12 +11,15 @@ $(()=>{
         }
         else{
             console.log("Welcome " + data.username);
-            console.log(data.category);
+            $('#login123')
+                .text(data.username)
+                .attr("href","#")
+            $("#logout").show();
         }
     });
 });
 
-$('#logout_btn').on('click',()=>{
+$('#logout').on('click',()=>{
     $.get('/users/logout',(data)=>{
         if(data=='Success'){
         //Logged Out Successfully
@@ -23,4 +27,4 @@ $('#logout_btn').on('click',()=>{
             document.location.href = '/login';
         }
     })
-})
+});
