@@ -133,6 +133,65 @@ function setCircleDasharray() {
     .setAttribute("stroke-dasharray", circleDasharray);
 }
 
+function get_curr_date(){
+  return new Promise((resolve,reject)=>{
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10){
+      dd='0'+dd;
+    } 
+    if(mm<10){
+      mm='0'+mm;
+    } 
+    today = yyyy +'-'+ mm +'-'+ dd;
+    console.log(today);
+    resolve(today);
+  })
+}
+
+function time_diff(set_date){
+    let today = new Date();
+    let curr_hh = today.getHours();
+    let curr_min = today.getMinutes();
+    
+    let scheduled_time = set_date.time.split(':');
+
+    let diff = (curr_hh-scheduled_time[0])*60 + curr_min-scheduled_time[1];
+    console.log("Diff ayaa : " + diff);
+
+    return ((diff>=0) && (diff<=15));
+
+}
+
+function compare_date(set_date){
+
+  return new Promise((resolve,reject)=>{
+    if(set_date.status=="Failure"){
+      resolve(-1);
+    }
+    get_curr_date().then((today)=>{
+      let curr_date_1 = today.split('-');
+      let set_date_1 = (set_date.date).split('-');
+    
+      console.log(curr_date_1);
+      console.log(set_date_1);
+    
+      if(curr_date_1[0]==set_date_1[0]){
+        if(curr_date_1[1]==set_date_1[1]){
+           if(curr_date_1[2]==set_date_1[2]){
+              let res = time_diff(set_date);
+              resolve(res);
+          }
+        }
+      }
+      
+      resolve(0);
+    })
+  })
+}
+
 
 $('#attemptexam').on('click',()=>{
 
@@ -142,16 +201,31 @@ $('#attemptexam').on('click',()=>{
         sub_code : code
     };
 
-    $.post('/marks/checkattempt',obj,(data)=>{
-        console.log(data);
-        if(data=="Yes"){
-            alert('Already Attempted');
-            document.location.href = '/student';
-        }
-        else{
-            alert('Sending request to view questions in Exam ' + code);
-            load_exam(obj);
-        }
+    $.post('/exam/get_time',obj,(data)=>{
+      
+        compare_date(data).then((result)=>{
+          console.log("Compare karke result aaya : " + result);
+          if(result == -1){
+              alert("No such exam scheduled");
+          }
+          else if(result==0){
+              alert('Not allowed to give exam now! Exam Scheduled at ' + data.date + ' at ' + data.time);
+          }
+          else{
+              $.post('/marks/checkattempt',obj,(data)=>{
+                console.log(data);
+                if(data=="Yes"){
+                    alert('Already Attempted');
+                    document.location.href = '/student';
+                }
+                else{
+                    alert('Sending request to view questions in Exam ' + code);
+                    document.documentElement.requestFullscreen();
+                    load_exam(obj);
+                }
+              });
+          }
+      });
     });
 
 });
@@ -229,6 +303,7 @@ function load_exam(obj){
         var submitbtn = document.createElement("button");
         submitbtn.className = "submitexam";
         submitbtn.textContent = "SUBMIT";
+        submitbtn.id = "mybtn";
         var newline = document.createElement('br');
         document.getElementById('two').appendChild(newline);
         document.getElementById('two').appendChild(submitbtn);
@@ -240,3 +315,12 @@ function load_exam(obj){
 
     })
 }
+
+function exitHandler(){
+  if(!document.fullscreenElement){
+      console.log("Exit Screen");
+      $('#mybtn').click();
+  }
+}
+
+document.addEventListener('fullscreenchange',exitHandler,false);
