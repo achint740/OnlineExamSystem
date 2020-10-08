@@ -14,12 +14,39 @@ route.use(passport.session());
 
 
 //----------------------------- POST REQUEST FOR SCHEDULE EXAMINATION -----------------------------
+route.post('/get_time',function(req,res){
+    subjects.findOne({
+        where : {
+            sub_code : req.body.sub_code
+        }
+    }).then((sub)=>{
+        if(sub){
+            console.log("Subject Found");
+            let msg = {
+                status : "Success",
+                date : sub.dataValues.date_of_exam,
+                time : sub.dataValues.time_of_exam,
+            }
+            res.send(msg);
+        }
+        else{
+            let msg ={
+                status : "Failure"
+            }
+            res.send(msg);
+        }
+    });
+});
+
+
+//----------------------------- POST REQUEST FOR SCHEDULE EXAMINATION -----------------------------
 route.post('/schedule',function(req,res){
 
     subjects.create({
         sub_code : req.body.sub_name,
         sub_name : req.body.sub_code,
-        date_of_exam : req.body.date_of_exam
+        date_of_exam : req.body.date_of_exam,
+        time_of_exam  : req.body.time_of_exam
     }).then((createdsubject)=>{
         res.send('Success');
     });
