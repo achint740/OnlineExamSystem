@@ -24,7 +24,10 @@ const subjectsDB = db.define('subjects',{
     exam_status : {
         type : Sequelize.INTEGER,
         defaultValue : 0
-    }       
+    },
+    ques_cnt : {
+        type : Sequelize.INTEGER
+    }
 });
 
 const quesDB = db.define('ques',{
