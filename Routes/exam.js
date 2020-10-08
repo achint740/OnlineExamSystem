@@ -13,7 +13,7 @@ route.use(passport.initialize());
 route.use(passport.session());
 
 
-//----------------------------- POST REQUEST FOR SCHEDULE EXAMINATION -----------------------------
+//----------------------------- POST REQUEST FOR GET EXAMINATION SCHEDULE-----------------------------
 route.post('/get_time',function(req,res){
     subjects.findOne({
         where : {
@@ -110,9 +110,16 @@ route.post('/finalise',function(req,res){
         }
     }).then((ques_list)=>{
         console.log(ques_list.length);
+        
+        subjects.update(
+            {ques_cnt : ques_list.length,
+            exam_status : 1},
+            {where : { sub_code : req.body.sub_code}}
+        ).then((rowUpdated)=>{
+            console.log("Row Updated");
+        });
 
-        build_col(ques_list)
-        .then((col)=>{
+        build_col(ques_list).then((col)=>{
             buildSheet(req.body.sub_code,col)
             res.send('Success');
         });

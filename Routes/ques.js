@@ -1,21 +1,36 @@
 const route = require('express').Router(); 
 const questions = require('../db').quesDB;
+const subjects = require('../db').subjectsDB;
 
 //-----------------------------POST REQUEST FOR ADD QUESTION -----------------------------
 route.post('/add',function(req,res){
-   
-    questions.create({
-        sub_code : req.body.sub_code,
-        question : req.body.ques,
-        option1 : req.body.op1,
-        option2 : req.body.op2,
-        option3 : req.body.op3,
-        option4 : req.body.op4,
-        answer : req.body.ans
-    }).then((createdQues)=>{
-        console.log(createdQues);
-        res.redirect('/successques');
-    });
+
+    subjects.findOne({
+        where : {sub_code : req.body.sub_code}
+    }).then((sub)=>{
+        if(sub){
+            if(sub.dataValues.exam_status == 1){
+                console.log('Exam Locked');
+            }
+            else{
+                questions.create({
+                    sub_code : req.body.sub_code,
+                    question : req.body.ques,
+                    option1 : req.body.op1,
+                    option2 : req.body.op2,
+                    option3 : req.body.op3,
+                    option4 : req.body.op4,
+                    answer : req.body.ans
+                }).then((createdQues)=>{
+                    console.log(createdQues);
+                    res.redirect('/successques');
+                });
+            }
+        }
+        else{
+            console.log('No such Subject Exists');
+        }
+    })
 
 });
 
