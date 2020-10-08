@@ -17,6 +17,10 @@ const subjectsDB = db.define('subjects',{
     date_of_exam : {
         type : Sequelize.DATEONLY,
     },
+    time_of_exam : {
+        type : Sequelize.TIME,
+        allowNull : true
+    },
     exam_status : {
         type : Sequelize.INTEGER,
         defaultValue : 0
