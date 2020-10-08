@@ -4,34 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teachers</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Welcome to Teachers Page</h1>
 
-    <button><a href="../Exam_Module/Add_Question/index.html">Add Question</a></button>
+    <nav class="navbar navbar-expand-sm -50 fixed-top">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <button><a href="../Exam_Module/View_Edit_Delete_Questions/index.html">View Exam Paper and Edit/Delete Questions</a></button>
+      <!-- // ---------------------------------------------  System Name ------------------------------------------------- // -->
+            <ul class="navbar-nav mr-auto">
+                <li id="dtu"><h3>TEACHER</h3></li>
+            </ul>
 
-    <button><a href="../Exam_Module/Edit_Results/index.html">Edit Results</a></button>
+      <!-- // --------------------------------------------- BUTTONS ------------------------------------------------- // -->
+            <ul class="navbar-nav  float-xs-right">
+
+      <!-- // --------------------------------------------- HOME ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="home" href="/">Home</a>
+                </li>
+
+       <!-- // --------------------------------------------- QUESTIONS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Exam_Module/Questions/index.html">Questions</a>
+                </li>     
+        
+        <!-- // --------------------------------------------- RESULTS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="Cart" href="../Exam_Module/Results/index.html">Results</a>
+                </li>  
+
+        <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
+              <li class="nav-item active">
+                  <a id="login123" class="nav-link xyz" href="#">Login</a>
+              </li> 
+
+        <!-- // --------------------------------------------- RESULTS ------------------------------------------------- // -->
+                <li class="nav-item active">
+                    <a class="nav-link xyz" id="logout">Logout</a>
+                </li>  
+            </ul>
+        </div>
+    </nav>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
     crossorigin="anonymous"></script>
-    <script>
-        $.get('/users/profile',(data)=>{
-            if(data.username==undefined){
-                alert('Please Login');
-                document.location.href = '/login';
-            }
-            else if(data.category=="student"){
-                alert("Not Authorized");
-                document.location.href='/student';
-            }
-            else{
-                console.log("Welcome " + data.username);
-                console.log(data.category);
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
