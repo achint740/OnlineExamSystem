@@ -43,8 +43,8 @@ route.post('/get_time',function(req,res){
 route.post('/schedule',function(req,res){
 
     subjects.create({
-        sub_code : req.body.sub_name,
-        sub_name : req.body.sub_code,
+        sub_code : req.body.sub_code,
+        sub_name : req.body.sub_name,
         date_of_exam : req.body.date_of_exam,
         time_of_exam  : req.body.time_of_exam
     }).then((createdsubject)=>{
@@ -73,6 +73,11 @@ function build_col(ques_list){
             header : "Username",
             key : "username",
             width : 25
+        });
+        col.push({
+            header : "Timestamp",
+            key : "time_submit",
+            width : 40
         });
         ques_list.forEach((q)=>{
             let id = (q.dataValues).id;
@@ -116,7 +121,7 @@ route.post('/finalise',function(req,res){
             exam_status : 1},
             {where : { sub_code : req.body.sub_code}}
         ).then((rowUpdated)=>{
-            console.log("Row Updated");
+            console.log("Exam Status Updated");
         });
 
         build_col(ques_list).then((col)=>{
@@ -154,7 +159,7 @@ function calculate_marks_store_responses_update_marks(obj,student){
 
         let new_row = {};
         new_row["username"] = user;
-
+        new_row["time_submit"] = new Date();
         data.forEach((q) => {
             console.log(q["id"] + "//" + q["answer"] + "//" + obj[q["id"]]);
             new_row[q["id"]] = obj[q["id"]];

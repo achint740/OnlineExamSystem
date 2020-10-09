@@ -11,6 +11,7 @@ route.post('/add',function(req,res){
         if(sub){
             if(sub.dataValues.exam_status == 1){
                 console.log('Exam Locked');
+                res.send("Exam Locked");
             }
             else{
                 questions.create({
@@ -23,14 +24,14 @@ route.post('/add',function(req,res){
                     answer : req.body.ans
                 }).then((createdQues)=>{
                     console.log(createdQues);
-                    res.redirect('/successques');
+                    res.send('Success')
                 });
             }
         }
         else{
-            console.log('No such Subject Exists');
+            res.send('No such Subject Exists');
         }
-    })
+    });
 
 });
 
