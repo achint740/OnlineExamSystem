@@ -10,12 +10,26 @@ $(()=>{
         }
         else{
             console.log("Welcome " + data.username);
-            console.log(data.category);
+            $('#login123')
+                .text(data.username)
+                .attr("href","#")
+            $("#logout").show();
         }
         
     });
     $('#markstable').hide();
 });
+
+$('#logout').on('click',()=>{
+    $.get('/users/logout',(data)=>{
+        if(data=='Success'){
+        //Logged Out Successfully
+            alert("Logged Out! Please login to access the portal");
+            document.location.href = '/login';
+        }
+    })
+});
+
 
 $('#showtable').on('click',refresh);
 
@@ -60,7 +74,7 @@ function refresh(){
 
             var marksnew = document.createElement("td");
             var marksnew_inp = document.createElement("input");
-            marksnew_inp.type = "text";
+            marksnew_inp.type = "number";
             marksnew_inp.className = "newmarks";
             marksnew.appendChild(marksnew_inp);
             row.appendChild(marksnew);

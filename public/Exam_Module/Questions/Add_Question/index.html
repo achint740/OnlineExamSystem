@@ -17,61 +17,39 @@
 
       <!-- // ---------------------------------------------  PORTAL Name ------------------------------------------------- // -->
             <ul class="navbar-nav mr-auto">
-                <li id="dtu"><h3>MANAGE QUESTIONS</h3></li>
+                <li><a href="../index.html"><h3 id="system">MANAGE QUESTIONS</h3></a></li>
             </ul>
-
-      <!-- // --------------------------------------------- BUTTONS ------------------------------------------------- // -->
-            <ul class="navbar-nav  float-xs-right">
-
-      <!-- // --------------------------------------------- HOME ------------------------------------------------- // -->
-                <li class="nav-item active">
-                    <a class="nav-link xyz" id="home" href="#">Home</a>
-                </li> 
-
-      <!-- // --------------------------------------------- ABOUT US ------------------------------------------------- // -->
-                <li class="nav-item active">
-                    <a class="nav-link xyz" id="abt" href="../../Manage_Exams/index.html">Exams</a>
-                </li>
-
-      <!-- // --------------------------------------------- ADMIN ------------------------------------------------- // -->
-                <li class="nav-item active">
-                    <a class="nav-link xyz" id="Cart" href="../index.html">Questions</a>
-                </li>
-
-       <!-- // --------------------------------------------- TEACHERS ------------------------------------------------- // -->
-                <li class="nav-item active">
-                    <a class="nav-link xyz" id="Cart" href="../../Results/index.html">Results</a>
-                </li>     
-
-      <!-- // --------------------------------------------- LOGIN ------------------------------------------------- // -->
-              <li class="nav-item active">
-                  <a id="login123" class="nav-link xyz" href="#">Logout</a>
-              </li> 
-            </ul>
+            
         </div>
     </nav>
 
     <h1>Add a New Question</h1>
 
-    <form method="POST" action="/ques/add">
-        <span class="one">Subject Code :  </span><input type="text" name="sub_code" required>
+    <div id="quesform"> 
+        <span class="one">Subject Code :  </span><input type="text" name="sub_code" id="sub_code" required>
         <br><br>
-        <span class="one">Question : &nbsp;  &nbsp; &nbsp;  </span><input type="text" name="ques" required>
+        <span class="one">Question : &nbsp;  &nbsp; &nbsp;  </span><input type="text" name="ques" id="ques" required>
         <br><br>
-        <span class="one"> Option A : &nbsp;  &nbsp; &nbsp;  </span>   <input type="text" name="op1" required    >
+        <span class="one"> Option A : &nbsp;  &nbsp; &nbsp;  </span>   <input type="text" name="op1" id="op1" required    >
         <br><br>
-        <span class="one">Option B :  &nbsp;  &nbsp; &nbsp;   </span><input type="text" name="op2" required    >
+        <span class="one">Option B :  &nbsp;  &nbsp; &nbsp;   </span><input type="text" name="op2"  id="op2" required    >
         <br><br>
-        <spane class="one">Option C : &nbsp;  &nbsp; &nbsp; </spane><input type="text" name="op3"  required   >
+        <spane class="one">Option C : &nbsp;  &nbsp; &nbsp; </spane><input type="text" name="op3" id="op3" required   >
         <br><br>
-        <span class="one">Option D :   &nbsp;  &nbsp; &nbsp;</span><input type="text" name="op4"  required   > 
+        <span class="one">Option D :   &nbsp;  &nbsp; &nbsp;</span><input type="text" name="op4" id="op4" required   > 
         <br><br>
-        <span class="one">Correct Ans : &nbsp; </span><input type="text" name="ans"  required   >
+        <label class="one" for="ans">Correct Ans : &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;</label>
+        <select class="one" name="ans" id="ans1">
+            <option default value="A">Correct Option</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
         <br><br>
-        <button type="submit" class="btn btn-success">ADD</button>
-    </form>
-
-    <h2>*Note : You would be redirected to "Manage Questions" after successfull addition of the question</h2>
+        <a href="../index.html" class="btn btn-success">Back to Manage Questions</a>
+        <button onclick="addques();" class="btn btn-success">ADD</button>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
     crossorigin="anonymous"></script>
