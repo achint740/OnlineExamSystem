@@ -41,7 +41,7 @@ nav{
     background-color: black;
 }
 
-#dtu{
+#system{
     margin-top: 10px; 
     color: cyan;  
 }
@@ -53,13 +53,7 @@ nav{
     color: white;
 }
 
-.xyz1{
-    text-align: center;
-    font-size: 18px;
-    color: wheat;
-}
-
- .xyz:hover{
+.xyz:hover{
     text-decoration-color: aqua;
     color: rgb(120, 219, 226);
     font-size: 24px;
