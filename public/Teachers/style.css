@@ -1,9 +1,9 @@
 body{
     background-image: url('./T1.jpg');
-    background-size: cover;
+    background-size: 102%;
 }
 
-i{
+li{
     padding-left: 10px;
     font-size: 20px;
 }
