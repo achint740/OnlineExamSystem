@@ -14,6 +14,7 @@ route.post('/add',function(req,res){
                 res.send("Exam Locked");
             }
             else{
+                console.log("Creating Question ... ")
                 questions.create({
                     sub_code : req.body.sub_code,
                     question : req.body.ques,
@@ -22,13 +23,19 @@ route.post('/add',function(req,res){
                     option3 : req.body.op3,
                     option4 : req.body.op4,
                     answer : req.body.ans
-                }).then((createdQues)=>{
-                    console.log(createdQues);
+                })
+                .then((createdQues)=>{
+                    console.log("Question Created : " + createdQues);
                     res.send('Success')
-                });
+                })
+                .catch((err)=>{
+                    console.log("Error Occured : " + err);
+                    res.send('Failure')
+                })
             }
         }
         else{
+            console.log("No such Subject Exists");
             res.send('No such Subject Exists');
         }
     });

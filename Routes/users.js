@@ -14,9 +14,14 @@ route.post('/add',(req,res)=>{
         username : req.body.username,
         password : req.body.password,
         category : req.body.category
-    }).then((createdUser)=>{
+    })
+    .then((createdUser)=>{
+        console.log("User Created : " + createdUser);
         res.send('Success');
-    });
+    })
+    .catch((err)=>{
+        console.log("Error Occured : " + err);
+    })
 });
 
 

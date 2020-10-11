@@ -30,6 +30,7 @@ route.post('/get_time',function(req,res){
             res.send(msg);
         }
         else{
+            console.log("Subject Not Found");
             let msg ={
                 status : "Failure"
             }
@@ -46,9 +47,16 @@ route.post('/schedule',function(req,res){
         sub_code : req.body.sub_code,
         sub_name : req.body.sub_name,
         date_of_exam : req.body.date_of_exam,
-        time_of_exam  : req.body.time_of_exam
-    }).then((createdsubject)=>{
+        time_of_exam  : req.body.time_of_exam,
+        exam_duration : req.body.duration
+    })
+    .then((createdsubject)=>{
+        console.log("Subject Created Successfully!" + createdsubject);
         res.send('Success');
+    })
+    .catch((err)=>{
+        console.log("Error! Couldn't insert!! " + err);
+        res.send("Failure");
     });
 
 });
@@ -113,22 +121,32 @@ route.post('/finalise',function(req,res){
         where : {
             sub_code : req.body.sub_code
         }
-    }).then((ques_list)=>{
-        console.log(ques_list.length);
+    })
+    .then((ques_list)=>{
+        console.log("No. of questions : " + ques_list.length);
         
         subjects.update(
             {ques_cnt : ques_list.length,
             exam_status : 1},
             {where : { sub_code : req.body.sub_code}}
-        ).then((rowUpdated)=>{
-            console.log("Exam Status Updated");
-        });
+        )
+        .then((rowUpdated)=>{
+            console.log("Exam Status Updated " + rowUpdated);
+            build_col(ques_list).then((col)=>{
+                buildSheet(req.body.sub_code,col)
+                res.send('Success');
+            });
+        })
+        .catch((err)=>{
+            console.log("Error Occured!! " + err);
+            res.send('Failure');
+        })
 
-        build_col(ques_list).then((col)=>{
-            buildSheet(req.body.sub_code,col)
-            res.send('Success');
-        });
-    });
+    })
+    .catch((err)=>{
+        console.log("Error Occured!! " + err);
+        res.send('Failure');
+    })
 
 });
 
@@ -136,8 +154,7 @@ route.post('/finalise',function(req,res){
 //-----------------------------POST REQUEST FOR SUBMIT EXAM -----------------------------
 route.post('/submit',function(req,res){
 
-    let m = calculate_marks_store_responses_update_marks(req.body,req.user);
-    //console.log("Marks Obtained = " + m);
+    calculate_marks_store_responses_update_marks(req.body,req.user);
 
     res.redirect('/student');
 
@@ -172,11 +189,12 @@ function calculate_marks_store_responses_update_marks(obj,student){
         const worksheet = workbook.getWorksheet(code);
         worksheet.addRow(new_row);
         var filename = "Responses.xlsx";
-        workbook.xlsx.writeFile(filename).then(()=>{
-            // callback(null);
+        workbook.xlsx.writeFile(filename)
+        .then(()=>{
             console.log('Sheet Updated Successfully');
-        }).catch((err)=>{
-            console.log(err);
+        })
+        .catch((err)=>{
+            console.log("Error Occured " + err);
         });
 
         //Add Marks to Database
@@ -187,11 +205,16 @@ function calculate_marks_store_responses_update_marks(obj,student){
             sub_code : code,
             username : user,
             marks_given : total_marks
-        }).then((info)=>{
-            console.log('Exam Attempted Successfully!');
+        })
+        .then((info)=>{
+            console.log('Exam Attempted Successfully!' + info);
             console.log("Marks Alloted : " + total_marks + " For Roll No. " + user);
-        });
-        return total_marks;
+            return 1;
+        })
+        .catch((err)=>{
+            console.log('Error Occured');
+            return 0;
+        })
 
     });
 }

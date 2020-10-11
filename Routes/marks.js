@@ -16,8 +16,8 @@ route.post('/list',function(req,res){
         where : {
             sub_code : req.body.sub_code
         } 
-    }).then((val)=>{
-        res.send(val);
+    }).then((markslist)=>{
+        res.send(markslist);
     });
 });
 
@@ -29,8 +29,8 @@ route.post('/my',function(req,res){
             sub_code : req.body.sub_code,
             username : req.user.username
         }
-    }).then((val)=>{
-        res.send(val);
+    }).then((mymarks)=>{
+        res.send(mymarks);
     })
 })
 
@@ -41,6 +41,7 @@ route.post('/change',function(req,res) {
         where : {sub_code : req.body.sub_code,username : req.body.username}
     }).then((record)=>{
             if(record){
+                console.log("Found! Updating ...");
                 msg = 'Success';
                 record.update({
                     marks_given : req.body.newmarks
@@ -48,6 +49,7 @@ route.post('/change',function(req,res) {
             }
             else{
                 //No Such Record Found
+                console.log("No such record found");
             }
             res.send(msg);
         });
@@ -63,9 +65,11 @@ route.post('/checkattempt',function(req,res){
         }
     }).then((val)=>{
         if(val){
+            console.log("Entry Found! ALready Attempted");
             res.send("Yes");
         }
         else{
+            console.log("Entry Not Found! Can Attempt");
             res.send("No");
         }
     })
