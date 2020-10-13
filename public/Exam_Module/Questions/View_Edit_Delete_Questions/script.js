@@ -38,73 +38,82 @@ $('#viewexam').on('click',()=>{
 
     $.post('/exam/view',obj,(data)=>{
         // console.log(data);
-        $('#two').empty();
-        data.forEach((ques) => {
-            
-            //QUESTION
-            var para = document.createElement("p");
-            var q = document.createTextNode("Q" + ques["id"] + " " + ques["question"]);
-            para.appendChild(q);
-            para.contentEditable = "true";
-            para.id = ques["id"];
-            var ele = document.getElementById("two");
-            ele.appendChild(para);
-
-            //Options
-            for(var i=1;i<=4;i++){
-                var p = document.createElement("p");
-                var k = "option";
-                k+=i;
-                p.contentEditable = "true";
-                var op = document.createTextNode(ques[k]);
-                p.appendChild(op);
-                p.className = k;
-                var e = document.getElementById("two");
-                e.appendChild(p);
-            }
-
-            var upd_btn = document.createElement("button");
-            upd_btn.textContent = "Update";
-            document.getElementById("two").appendChild(upd_btn);
-
-            upd_btn.addEventListener("click",function(){
-                let obj = {
-                    sub_code : $('#sub_code').val(),
-                    id : this.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.id,
-                    question : this.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML,
-                    option1 : this.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML,
-                    option2 : this.previousSibling.previousSibling.previousSibling.innerHTML,
-                    option3 : this.previousSibling.previousSibling.innerHTML,
-                    option4 : this.previousSibling.innerHTML 
-                }
-                update_ques(obj);
-            });
-
-            var del_btn = document.createElement("button");
-            del_btn.textContent = "Delete";
-            document.getElementById("two").appendChild(del_btn);
-
-            del_btn.addEventListener("click",function(){
-                let obj = {
-                    sub_code : $('#sub_code').val(),
-                    id : this.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.id
-                }
-                delete_ques(obj);
-            });
-            
-        });
+        if(data.length == 0){
+            alert('No Questions for : ' + obj.sub_code);
+        }
+        else{
+            $('#two').empty();
+            create_header();
+            view_ques(data);
+        }
 
     });
 
-    // $('#one').hide();
     $('#two').show();
 
 });
 
+function create_header(){
+
+    var tablehead = document.createElement("thead");
+
+    var header_row = document.createElement("tr");
+    
+    var th,th_data;
+
+    th = document.createElement("th");
+    th_data = document.createTextNode("Question ID");
+    th.appendChild(th_data);
+    header_row.appendChild(th);
+
+    th = document.createElement("th");
+    th_data = document.createTextNode("Question");
+    th.appendChild(th_data);
+    header_row.appendChild(th);
+
+    th = document.createElement("th");
+    th_data = document.createTextNode("Option 1");
+    th.appendChild(th_data);
+    header_row.appendChild(th);
+
+    th = document.createElement("th");
+    th_data = document.createTextNode("Option 2");
+    th.appendChild(th_data);
+    header_row.appendChild(th);
+
+    th = document.createElement("th");
+    th_data = document.createTextNode("Option 3");
+    th.appendChild(th_data);
+    header_row.appendChild(th);
+
+    th = document.createElement("th");
+    th_data = document.createTextNode("Option 4");
+    th.appendChild(th_data);
+    header_row.appendChild(th);
+
+    th = document.createElement("th");
+    th_data = document.createTextNode("Answer");
+    th.appendChild(th_data);
+    header_row.appendChild(th);
+
+    th = document.createElement("th");
+    th_data = document.createTextNode("Update");
+    th.appendChild(th_data);
+    header_row.appendChild(th);
+
+    th = document.createElement("th");
+    th_data = document.createTextNode("Delete");
+    th.appendChild(th_data);
+    header_row.appendChild(th);
+
+    tablehead.appendChild(header_row);
+    document.getElementById("two").appendChild(tablehead);
+}
+
 function update_ques(obj){
     $.post('/ques/update',obj,(data)=>{
         if(data=='Success')
-            alert("Question " + obj.id + " Updated Successfully");
+            alert("Q" + obj.id + " Updated Successfully");
         else 
             alert('Error! Try Again Please');
     });
@@ -114,9 +123,94 @@ function delete_ques(obj){
     $.post('/ques/delete',obj,(data)=>{
         if(data=='Success'){
             $('#viewexam').click();
-            alert("Question " + obj.id + " Deleted Successfully");
+            alert("Q" + obj.id + " Deleted Successfully");
         }
         else 
             alert('Error! Try Again Please');
     });
+}
+
+function view_ques(questions_list){
+    var tablebody = document.createElement("tbody");
+    questions_list.forEach((question)=>{
+
+        
+        var new_row = document.createElement("tr");
+
+        //QUESTION ID   
+        var qid = document.createElement("td");
+        var qid_text = document.createTextNode("Q" + question["id"]);
+        qid.appendChild(qid_text);
+        qid.id = question["id"];
+        new_row.appendChild(qid);
+
+        //QUESTION DESCRIPTION
+        var ques = document.createElement("td");
+        var ques_text = document.createTextNode(question["question"]);
+        ques.appendChild(ques_text);
+        ques.contentEditable = "true";
+        new_row.appendChild(ques);
+
+
+        //OPTIONS
+        for(var i=1;i<=4;i++){
+            var op = document.createElement("td");
+            var k = "option";
+            k+=i;
+            op.contentEditable = "true";
+            var op_text = document.createTextNode(question[k]);
+            op.appendChild(op_text);
+            op.className = k;
+            new_row.appendChild(op);
+        }
+
+        //CORRECT ANSWER
+        var ans = document.createElement("td");
+        var ans_text = document.createTextNode(question["answer"]);
+        ans.appendChild(ans_text);
+        ans.contentEditable = "true";
+        new_row.appendChild(ans);
+
+        //UPDATE
+        var btn_td1 = document.createElement("td");
+        var upd_btn = document.createElement("button");
+        upd_btn.textContent = "Update";
+        upd_btn.className = "btn btn-warning";
+        btn_td1.appendChild(upd_btn);
+        new_row.appendChild(btn_td1);
+
+        upd_btn.addEventListener("click",function(){
+            let obj = {
+                sub_code : $("#sub_code").val(),
+                id : this.parentElement.parentElement.firstChild.id,
+                answer : this.parentElement.previousSibling.innerHTML,
+                option4 : this.parentElement.previousSibling.previousSibling.innerHTML,
+                option3 : this.parentElement.previousSibling.previousSibling.previousSibling.innerHTML,
+                option2 : this.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML,
+                option1 : this.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML,
+                question : this.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML
+            };
+            update_ques(obj);
+        })
+
+        //DELETE
+        var btn_td2 = document.createElement("td");
+        var del_btn = document.createElement("button");
+        del_btn.textContent = "Delete";
+        del_btn.className = "btn btn-danger";
+        btn_td2.appendChild(del_btn);
+        new_row.appendChild(btn_td2);
+
+        del_btn.addEventListener("click",function(){
+            let obj = {
+                sub_code : $('#sub_code').val(),
+                id : this.parentElement.parentElement.firstChild.id
+            };
+            delete_ques(obj);
+        });
+
+
+        tablebody.appendChild(new_row);
+    });
+    document.getElementById("two").appendChild(tablebody);
 }
