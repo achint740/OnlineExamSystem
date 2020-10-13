@@ -39,7 +39,8 @@ $("#create_exam").on('click',()=>{
         sub_code : $("#sub_code").val(),
         sub_name : $("#sub_name").val(),
         date_of_exam : $('#dateexam').val(),
-        time_of_exam : $('#timeexam').val()
+        time_of_exam : $('#timeexam').val(),
+        duration : $('#duration').val()
     };
 
     $.post('/exam/schedule',obj,(data)=>{
@@ -48,7 +49,7 @@ $("#create_exam").on('click',()=>{
             document.location.href = "../../Questions/index.html";
         }
         else{
-            alert('Failure');
+            alert('Subject with this code already exists!');
         }
     });
 
