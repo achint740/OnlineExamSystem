@@ -48,7 +48,7 @@ thead{
 }
 
 td:hover{
-    border: 4px solid red;
+    border: 4px solid rgb(71, 75, 74);
 }
 
 tbody tr:nth-of-type(even) {
@@ -63,7 +63,8 @@ tbody tr:nth-of-type(odd) {
 
 h1{
     font-family: 'PT Sans', sans-serif;
-    color: red;
+    color: #822931;
+    text-decoration: underline;
 }
 
 #enter{
@@ -82,3 +83,12 @@ input:hover{
     border: 2px solid black;
     background-color: rgb(236, 215, 215);
 }
+
+.btn-danger{
+    background-color: maroon;
+}
+
+.btn-warning:hover{
+    background-color: yellow;
+}
+

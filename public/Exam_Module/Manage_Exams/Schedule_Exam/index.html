@@ -58,40 +58,17 @@
             </ul>
         </div>
     </nav>
-
-    <div id="createexamform">
-        <h1>Schedule Exam</h1> 
-
-        <br>
-
-        <h4>Enter Subject Code : </h4>
-        <input  id="sub_code" type="text" required>
-
-        <br><br>
-
-        <h4>Enter Subject Name : </h4>
-        <input  id="sub_name" type="text" required>
-
-        <br><br>
-
-        <h4>Enter Date  : </h4>
-        <input  id="dateexam" type="date">
-        
-        <br><br>
-
-        <h4>Enter Time  : </h4>
-        <input  id="timeexam" type="time">
-        
-        <br><br>
-
-        <h4>Enter Duration  : </h4>
-        <input  id="duration" type="number">
-        
-        <br><br>
-
-
-        <button id="create_exam" type="button" class="btn btn-primary" >CREATE</button>
-
+    
+    <div class="form-style-6">
+        <h1>Schedule Examination</h1>
+        <div id="create_form">
+            <input type="text" id="sub_code" placeholder="Subject Code" />
+            <input type="text" id="sub_name" placeholder="Subject Name" />
+            <input type="date" id="dateexam" placeholder="Examination Date"/>
+            <input type="time" id="timeexam" placeholder="Examination Time" />
+            <input type="number" id="duration" placeholder="Duration">
+            <button id="create_exam" type="button" class="btn btn-primary" >CREATE</button>
+        </div>
     </div>
     
 
