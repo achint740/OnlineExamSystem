@@ -21,6 +21,7 @@ route.post('/add',(req,res)=>{
     })
     .catch((err)=>{
         console.log("Error Occured : " + err);
+        res.send('Failure');
     })
 });
 

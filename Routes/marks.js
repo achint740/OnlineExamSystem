@@ -16,8 +16,14 @@ route.post('/list',function(req,res){
         where : {
             sub_code : req.body.sub_code
         } 
-    }).then((markslist)=>{
+    })
+    .then((markslist)=>{
+        console.log('Sending Markslist');
         res.send(markslist);
+    })
+    .catch((err)=>{
+        console.log('Error Occured ' + err);
+        res.send([]);
     });
 });
 
@@ -29,8 +35,14 @@ route.post('/my',function(req,res){
             sub_code : req.body.sub_code,
             username : req.user.username
         }
-    }).then((mymarks)=>{
-        res.send(mymarks);
+    })
+    .then((mymarks)=>{
+        if(mymarks){
+            res.send(mymarks);
+        }
+        else{
+            res.send('Not Attempted!');
+        }
     })
 })
 
@@ -39,20 +51,24 @@ route.post('/change',function(req,res) {
     let msg = 'Failure';
     marks.findOne({
         where : {sub_code : req.body.sub_code,username : req.body.username}
-    }).then((record)=>{
-            if(record){
-                console.log("Found! Updating ...");
-                msg = 'Success';
-                record.update({
-                    marks_given : req.body.newmarks
-                })
-            }
-            else{
-                //No Such Record Found
-                console.log("No such record found");
-            }
-            res.send(msg);
-        });
+    })
+    .then((record)=>{
+        if(record){
+            console.log("Found! Updating ...");
+            msg = 'Success';
+            record.update({
+                marks_given : req.body.newmarks
+            })
+        }
+        else{
+            console.log("No such record found");
+        }
+        res.send(msg);
+    })
+    .catch((err)=>{
+        console.log('Error Occured ' + err);
+        res.send('Failure');
+    })
 });
 
 
@@ -63,7 +79,8 @@ route.post('/checkattempt',function(req,res){
             sub_code : req.body.sub_code,
             username : req.user.username
         }
-    }).then((val)=>{
+    })
+    .then((val)=>{
         if(val){
             console.log("Entry Found! ALready Attempted");
             res.send("Yes");
@@ -72,6 +89,10 @@ route.post('/checkattempt',function(req,res){
             console.log("Entry Not Found! Can Attempt");
             res.send("No");
         }
+    })
+    .catch((err)=>{
+        console.log('Error Occured ' + err);
+        res.send('Error');
     })
 });
 

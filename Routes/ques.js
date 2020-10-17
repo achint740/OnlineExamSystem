@@ -8,43 +8,36 @@ route.post('/add',function(req,res){
     subjects.findOne({
         where : {sub_code : req.body.sub_code}
     }).then((sub)=>{
-        if(sub){
-            if(sub.dataValues.exam_status == 1){
-                console.log('Exam Locked');
-                res.send("Exam Locked");
-            }
-            else{
-                console.log("Creating Question ... ")
-                questions.create({
-                    sub_code : req.body.sub_code,
-                    question : req.body.ques,
-                    option1 : req.body.op1,
-                    option2 : req.body.op2,
-                    option3 : req.body.op3,
-                    option4 : req.body.op4,
-                    answer : req.body.ans
-                })
-                .then((createdQues)=>{
-                    console.log("Question Created : " + createdQues);
-                    res.send('Success')
-                })
-                .catch((err)=>{
-                    console.log("Error Occured : " + err);
-                    res.send('Failure')
-                })
-            }
+        if(sub && (sub.dataValues.exam_status == 1)){
+            console.log('Exam Locked');
+            res.send("Exam Locked");
         }
         else{
-            console.log("No such Subject Exists");
-            res.send('No such Subject Exists');
+            console.log("Creating Question ... ")
+            questions.create({
+                sub_code : req.body.sub_code,
+                question : req.body.ques,
+                option1 : req.body.op1,
+                option2 : req.body.op2,
+                option3 : req.body.op3,
+                option4 : req.body.op4,
+                answer : req.body.ans
+            })
+            .then((createdQues)=>{
+                console.log("Question Created : " + createdQues);
+                res.send('Success')
+            })
+            .catch((err)=>{
+                console.log("Error Occured : " + err);
+                res.send('Failure')
+            })
         }
     });
-
 });
 
 //-----------------------------POST REQUEST FOR UPDATE QUESTION -----------------------------
 route.post('/update',function(req,res){
-    let msg = 'Failure';
+
     questions.findOne({
         where : {
             sub_code : req.body.sub_code,
@@ -58,14 +51,22 @@ route.post('/update',function(req,res){
                 option1 : req.body.option1,
                 option2 : req.body.option2,
                 option3 : req.body.option3,
-                option4 : req.body.option4
+                option4 : req.body.option4,
+                answer : req.body.answer
+            })
+            .then((updatedQues)=>{
+                console.log('Question Updated!');
+                res.send('Update Successfull');
+            })
+            .catch((err)=>{
+                console.log('Error Occured ' + err);
+                res.send('Failed to Update! ERROR');
             })
         }
         else{
-            //No Such Question Found
+            res.send('Question not found in database! Consistency error');
         }
-        res.send(msg);
-    })
+    });
 });
 
 
@@ -76,8 +77,15 @@ route.post('/delete',function(req,res){
             id : req.body.id,
             sub_code : req.body.sub_code
         }
+    })
+    .then((deletedQues)=>{
+        console.log('Question Deleted!');
+        res.send('Delete Successfull');
+    })
+    .catch((err)=>{
+        console.log('Error Occured ' + err);
+        res.send('Failed to delete! ERROR');
     });
-    res.send('Success');
 });
 
 module.exports = {

@@ -8,7 +8,8 @@ const db = new Sequelize({
 const subjectsDB = db.define('subjects',{
     sub_code : {
         type : Sequelize.STRING,
-        allowNull : false
+        allowNull : false,
+        primaryKey : true
     },
     sub_name : {
         type : Sequelize.STRING,
@@ -27,6 +28,10 @@ const subjectsDB = db.define('subjects',{
     },
     ques_cnt : {
         type : Sequelize.INTEGER
+    },
+    exam_duration : {
+        type : Sequelize.INTEGER,
+        allowNull: false
     }
 });
 
@@ -86,7 +91,7 @@ const usersDB = db.define('users',{
     username : {
         type : Sequelize.STRING,
         allowNull : false,
-        unique : true
+        primaryKey : true
     },
     password : {
         type : Sequelize.STRING,

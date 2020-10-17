@@ -50,13 +50,13 @@ route.post('/schedule',function(req,res){
         time_of_exam  : req.body.time_of_exam,
         exam_duration : req.body.duration
     })
-    .then((createdsubject)=>{
-        console.log("Subject Created Successfully!" + createdsubject);
+    .then((createdSubject)=>{
+        console.log("Subject Created Successfully!" + createdSubject);
         res.send('Success');
     })
     .catch((err)=>{
         console.log("Error! Couldn't insert!! " + err);
-        res.send("Failure");
+        res.send('Failure');
     });
 
 });
@@ -69,9 +69,15 @@ route.post('/view',function(req,res){
         where : {
             sub_code : req.body.sub_code
         } 
-    }).then((ques_list)=>{
+    })
+    .then((ques_list)=>{
+        console.log('Questions found! Sending List ...');
         res.send(ques_list);
-    });
+    })
+    .catch((err)=>{
+        console.log('Error Occured' + err);
+        res.send('Failure');
+    })
 });
 
 function build_col(ques_list){
@@ -189,6 +195,7 @@ function calculate_marks_store_responses_update_marks(obj,student){
         const worksheet = workbook.getWorksheet(code);
         worksheet.addRow(new_row);
         var filename = "Responses.xlsx";
+        
         workbook.xlsx.writeFile(filename)
         .then(()=>{
             console.log('Sheet Updated Successfully');
