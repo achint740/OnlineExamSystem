@@ -195,14 +195,14 @@ function calculate_marks_store_responses_update_marks(obj,student){
         const worksheet = workbook.getWorksheet(code);
         worksheet.addRow(new_row);
         var filename = "Responses.xlsx";
-        
+
         workbook.xlsx.writeFile(filename)
         .then(()=>{
             console.log('Sheet Updated Successfully');
         })
         .catch((err)=>{
             console.log("Error Occured " + err);
-        });
+        })
 
         //Add Marks to Database
         total_marks*=4;

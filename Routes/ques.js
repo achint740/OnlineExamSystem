@@ -80,7 +80,7 @@ route.post('/delete',function(req,res){
     })
     .then((deletedQues)=>{
         console.log('Question Deleted!');
-        res.send('Delete Successfull');
+        res.send('Success');
     })
     .catch((err)=>{
         console.log('Error Occured ' + err);

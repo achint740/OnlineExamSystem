@@ -38,8 +38,9 @@ route.post('/delete',(req,res)=>{
                 where : {
                     username : req.body.username
                 }
-            });
-            res.send('Success! User Deleted');
+            }).then(()=>{
+                res.send('Success! User Deleted');
+            })
         }
         else{
             res.send('Failure! No Such User');
