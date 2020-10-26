@@ -6,7 +6,7 @@ function add(){
     };
 
     $.post('/users/add',obj,(data)=>{
-        alert(data);
+        alert('User Add : ' + data);
         if(data=='Success'){
             $('#userid0').val('');
             $('#temp_pass').val('');
@@ -25,5 +25,5 @@ function deleteuser(){
         if(data=='Success'){
             $('#userid2').val('');
         }
-    })
+    });
 }

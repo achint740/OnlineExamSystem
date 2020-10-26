@@ -112,10 +112,7 @@ function create_header(){
 
 function update_ques(obj){
     $.post('/ques/update',obj,(data)=>{
-        if(data=='Success')
-            alert("Q" + obj.id + " Updated Successfully");
-        else 
-            alert('Error! Try Again Please');
+        alert(data);
     });
 }
 

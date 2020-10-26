@@ -1,10 +1,13 @@
 $(document).ready(()=>{
     $.get('/users/profile',(data)=>{
+
+        setTimeout(()=>{
+          $('.wrapper').hide();
+        },3000);
+
         if(data.username!=undefined){
             console.log("Welcome " + data.username);
-            console.log(data.category);
             $('#roll').html(data.username);
-            // $('.navbar').append("<button id='logout'>Logout</button>");
         }
         else{
             alert("Please Login");
@@ -14,6 +17,15 @@ $(document).ready(()=>{
 
     $('#two').hide();
     $('#three').hide();
+});
+
+$("#logout").on('click',function(){
+  $.get("/users/logout",(data)=>{
+      if(data=='Success'){
+        alert('Logged out!');
+          document.location.href = '/';
+      }
+  });
 });
 
 const FULL_DASH_ARRAY = 283;
@@ -136,6 +148,7 @@ function setCircleDasharray() {
 function get_curr_date(){
   return new Promise((resolve,reject)=>{
     var today = new Date();
+    console.log(typeof(today));
     var dd = today.getDate();
     var mm = today.getMonth()+1; 
     var yyyy = today.getFullYear();
@@ -213,21 +226,23 @@ $('#attemptexam').on('click',()=>{
           }
           else{
               $.post('/marks/checkattempt',obj,(data)=>{
-                console.log(data);
-                if(data=="Yes"){
-                    alert('Already Attempted');
-                    document.location.href = '/student';
-                }
-                else{
-                    alert('Sending request to view questions in Exam ' + code);
-                    document.documentElement.requestFullscreen();
-                    load_exam(obj);
-                }
+                  console.log(data);
+                  if(data=="Yes"){
+                      alert('Already Attempted');
+                      document.location.href = '/student';
+                  }
+                  else if(data=="Error"){
+                    alert('Error Occured!');
+                  }
+                  else{
+                      alert('Sending request to view questions in Exam ' + code);
+                      document.documentElement.requestFullscreen();
+                      load_exam(obj);
+                  }
               });
           }
       });
     });
-
 });
 
 $('#getmarks').on('click',()=>{
@@ -239,7 +254,6 @@ $('#getmarks').on('click',()=>{
     }
 
     $.post('/marks/my',obj,(data)=>{
-        //var marks = document.createTextNode(data.dataValues.marks_given);
         var m = document.createTextNode(data.marks_given);
         console.log(data);
         document.getElementById('myscore').appendChild(m);
@@ -263,14 +277,16 @@ function load_exam(obj){
         document.getElementById('two').appendChild(code_inp);
 
         data.forEach((ques) => {
+
+            var ques_div = document.createElement("div");
+            ques_div.id = "ques_div";
         
             //QUESTION
             var para = document.createElement("p");
             var q = document.createTextNode("Q" + ques["id"] + ".  " + ques["question"]);
             para.id = ques["id"];
             para.appendChild(q);
-            var ele = document.getElementById("two");
-            ele.appendChild(para);
+            ques_div.appendChild(para);
 
             //OPTIONS
             for(var i=1;i<=4;i++){
@@ -292,11 +308,15 @@ function load_exam(obj){
                   
                 var newline = document.createElement('br');
                   
-                var container = document.getElementById('two');
-                container.appendChild(opt);
-                container.appendChild(label);
-                container.appendChild(newline);
+                ques_div.appendChild(opt);
+                ques_div.appendChild(label);
+                ques_div.appendChild(newline);
             }
+
+            var hr = document.createElement('hr');
+            ques_div.appendChild(hr);
+
+          document.getElementById('two').appendChild(ques_div);
 
         });
         

@@ -1,4 +1,9 @@
 $(()=>{
+
+    setTimeout(()=>{
+        $('.wrapper').hide();
+    },3000);
+    
     $("#logout").hide();
     $.get('/users/profile',(data)=>{
         if(data.username==undefined){

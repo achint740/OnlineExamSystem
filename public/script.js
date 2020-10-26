@@ -1,4 +1,9 @@
 $(()=>{
+
+    setTimeout(()=>{
+        $('.wrapper').hide();
+    },3000);
+
     $("#logout").hide();
     $.get('/users/profile',(data)=>{
         if(data.username){
@@ -6,7 +11,7 @@ $(()=>{
                 .text(data.username)
                 .attr("href","#")
             $("#logout").show();
-            // alert('Logged In');
+                // alert('Logged In');
         }
         else{
             //No Such User
