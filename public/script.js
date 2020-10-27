@@ -11,10 +11,8 @@ $(()=>{
                 .text(data.username)
                 .attr("href","#")
             $("#logout").show();
-                // alert('Logged In');
         }
         else{
-            //No Such User
             // alert('Please Login');
         }
     });

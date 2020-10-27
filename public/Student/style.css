@@ -27,8 +27,6 @@ h5{
 .card-body{
   background-color: rgb(203, 232, 248);
   height: 250px;
-  /* font-weight: 300; */
-  /* color: rgb(82, 21, 139); */
 }
 
 img{
@@ -130,7 +128,6 @@ img{
   position: fixed;
   height: 100%;
   width: 100%;
-  
   background: url('../Images/Preloader4.gif') center  ;
   background-size: cover;
   z-index: 999999;   

@@ -22,7 +22,6 @@ $(()=>{
 $('#logout').on('click',()=>{
     $.get('/users/logout',(data)=>{
         if(data=='Success'){
-        //Logged Out Successfully
             alert("Logged Out! Please login to access the portal");
             document.location.href = '/login';
         }

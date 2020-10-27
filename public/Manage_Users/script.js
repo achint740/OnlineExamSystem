@@ -27,3 +27,7 @@ function deleteuser(){
         }
     });
 }
+
+function edituser(){
+    console.log('User Edit');
+}

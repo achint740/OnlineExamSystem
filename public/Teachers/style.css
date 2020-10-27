@@ -16,13 +16,12 @@ nav{
     background-color: black;
 }
 
-#dtu{
+#system{
     margin-top: 10px; 
     color: cyan;  
 }
 
-.xyz
-{
+.xyz{
     text-align: center;
     font-size: 20px;
     color: white;
@@ -34,7 +33,7 @@ nav{
     color: wheat;
 }
 
- .xyz:hover{
+.xyz:hover{
     text-decoration-color: aqua;
     color: rgb(120, 219, 226);
     font-size: 24px;
@@ -46,13 +45,12 @@ nav{
     background-color: black;
     z-index: 999999;
 }
+
 .loader{
     position: fixed;
     height: 100%;
     width: 100%;
-    
     background: url('../Images/Preloader4.gif') center  ;
     background-size: cover;
     z-index: 999999;   
-
 }

@@ -12,9 +12,7 @@ body, html {
   
     /* Full height */
     height: 100%;
-  
-    /* Center and scale the image nicely */
-    /* background-position: center; */
+
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -53,20 +51,14 @@ input{
 
 .card{
     text-align: center;
-    /* margin-top: 250px; */
     margin-left: 70px;
-    /* background-color: rgb(161, 114, 43) */
-    /* background: inherit; */
     border: 2px solid black;
     border-radius: 30px;
 }
 
 .card-body{
     background-color: rgb(157, 219, 171);
-    /* background: inherit; */
     height: 280px;
-    /* font-weight: 300; */
-    /* color: rgb(82, 21, 139); */
 }
 
 /*----------------------------------------------Styling For NAV STARTS-------------------------------------------- */

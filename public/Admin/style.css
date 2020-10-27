@@ -45,8 +45,7 @@ nav{
     color: cyan;  
 }
 
-.xyz
-{
+.xyz{
     text-align: center;
     font-size: 20px;
     color: white;
@@ -64,13 +63,12 @@ nav{
     background-color: black;
     z-index: 999999;
 }
+
 .loader{
     position: fixed;
     height: 100%;
     width: 100%;
-    
     background: url('../Images/Preloader4.gif') center  ;
     background-size: cover;
     z-index: 999999;   
-
 }

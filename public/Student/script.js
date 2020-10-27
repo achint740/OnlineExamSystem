@@ -22,7 +22,7 @@ $(document).ready(()=>{
 $("#logout").on('click',function(){
   $.get("/users/logout",(data)=>{
       if(data=='Success'){
-        alert('Logged out!');
+          alert('Logged out!');
           document.location.href = '/';
       }
   });
@@ -75,10 +75,6 @@ document.getElementById("app").innerHTML = `
   )}</span>
 </div>
 `;
-
-// document.getElementById("btn").addEventListener("click",function(){
-//     startTimer();
-// })
 
 function onTimesUp() {
   clearInterval(timerInterval);
@@ -199,10 +195,9 @@ function compare_date(set_date){
           }
         }
       }
-      
       resolve(0);
-    })
-  })
+    });
+  });
 }
 
 
@@ -258,6 +253,7 @@ $('#getmarks').on('click',()=>{
         console.log(data);
         document.getElementById('myscore').appendChild(m);
     });
+
 })
 
 function load_exam(obj){
@@ -333,7 +329,7 @@ function load_exam(obj){
 
         startTimer();
 
-    })
+    });
 }
 
 function exitHandler(){

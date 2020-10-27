@@ -48,7 +48,7 @@ nav{
     color: white;
 }
 
- .xyz:hover{
+.xyz:hover{
     text-decoration-color: aqua;
     color: rgb(120, 219, 226);
     font-size: 24px;
