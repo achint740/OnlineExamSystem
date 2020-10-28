@@ -5,7 +5,20 @@ body {
     background-repeat: no-repeat;
 }
 
+#header{
+  margin-left: 550px;
+  margin-right: 550px;
+  margin-top: 10px;
+}
+
 h5{
+  color: white;
+  float: left;
+  margin-left: 550px;
+  margin-right: 550px;
+}
+
+h4{
   color: white;
   float: left;
 }
@@ -21,7 +34,7 @@ h5{
   margin-left: 150px;
   background-color: rgb(161, 233, 240);
   border: 2px solid black;
-  border-radius: 30px;
+  /* border-radius: 30px; */
 }
 
 .card-body{
@@ -33,13 +46,7 @@ img{
   height: 200px;
 }
 
-#sub_code1{
-  width: 120px;
-  height: 35px;
-  text-align: center;
-}
-
-#sub_code2{
+#sub_code1,#sub_code2{
   width: 120px;
   height: 35px;
   text-align: center;
@@ -51,10 +58,19 @@ img{
   font-family: 'Libre Baskerville', serif;
 }
   
+
 .base-timer {
   position: relative;
   width: 100px;
   height: 100px;
+  float: right;
+}
+
+#subcode{
+   margin-left: 550px;
+   padding: 10px;
+   margin-bottom: 10px;
+  text-align: center;
 }
 
 .base-timer__svg {
@@ -68,7 +84,7 @@ img{
 
 .base-timer__path-elapsed {
   stroke-width: 7px;
-  stroke: grey;
+  stroke: rgb(204, 12, 188);
 }
 
 .base-timer__path-remaining {
@@ -82,7 +98,7 @@ img{
 }
 
 .base-timer__path-remaining.green {
-  color: rgb(65, 184, 131);
+  color: rgb(218, 214, 22);
 }
 
 .base-timer__path-remaining.orange {
@@ -108,13 +124,19 @@ img{
   color : white;
 }
 
-
-#ques_div{
-  text-align: center;
-  background-color: white;
-  font-size : 15px;
+.ques_div{
+  padding: 2rem;
+  background-color: rgb(37, 37, 37);
+  font-size : 20px;
   margin-left: 550px;
   margin-right: 550px;
+  border : 2px solid black;
+  display: block;
+  border-radius : 15px;
+  margin-top: 2rem;
+  overflow:auto;
+  color: whitesmoke;
+  
 }
 
 .wrapper{
@@ -132,3 +154,34 @@ img{
   background-size: cover;
   z-index: 999999;   
 }
+
+
+/* Styling for test */
+
+.opt_div{
+  display: block;
+  padding: .5em 1em;
+  margin-bottom: .5em;
+  background: rgb(7, 105, 235);
+  border-radius: 10px;
+}
+
+.opt_div:hover{
+  background-color:rgb(13, 243, 25);
+}
+
+#submit_div{
+  margin-left: 550px;
+  margin-right: 550px;
+}
+
+#submitTest{
+  float: right;
+}
+
+body{
+  background-color: #cce2f7;
+  width:100%;
+  height: 100vh;
+}
+

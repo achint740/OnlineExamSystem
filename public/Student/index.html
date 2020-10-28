@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -19,7 +18,7 @@
     </div>
 
     <nav class="navbar navbar-light">
-        <h5 id="roll">Hello</h5>
+        <h4 id="roll">Hello</h4>
         <span class="navbar-brand mb-0 h1" id="mynav">Student</span>
         <a class="btn btn-danger" id="logout">Logout</a>
     </nav>
@@ -54,14 +53,15 @@
 
         </div>
     </div>
+    
+        <form id="two" action="/exam/submit" method="POST">
+            
+            <div id="header">
+                <div id="app"></div>
+                <h1 id="examfor">Exam For : </h1>
+            </div>
 
-    <form id="two" action="/exam/submit" method="POST">
-        
-        <div id="app"></div>
-
-        <h1>Exam For : </h1>
-
-    </form>
+        </form>
 
     <div id="three">
         <h1 id="myscore">Your Marks : </h1>

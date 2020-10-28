@@ -3,7 +3,7 @@ $(document).ready(()=>{
 
         setTimeout(()=>{
           $('.wrapper').hide();
-        },3000);
+        },0);
 
         if(data.username!=undefined){
             console.log("Welcome " + data.username);
@@ -46,7 +46,7 @@ const COLOR_CODES = {
   }
 };
 
-const TIME_LIMIT = 20;
+const TIME_LIMIT = 7200;
 let timePassed = 0;
 let timeLeft = TIME_LIMIT;
 let timerInterval = null;
@@ -265,17 +265,21 @@ function load_exam(obj){
             document.location.href = '/student';
         }
 
+        document.body.style.backgroundImage = "url('./Img/b3.jpg')";
+
+
         var code_inp = document.createElement("input");
         code_inp.type = 'text';
         code_inp.defaultValue = obj.sub_code;
         code_inp.name = 'sub_code';
+        code_inp.id = 'subcode';
         code_inp.setAttribute('readonly',true);
         document.getElementById('two').appendChild(code_inp);
 
         data.forEach((ques) => {
 
             var ques_div = document.createElement("div");
-            ques_div.id = "ques_div";
+            ques_div.className = "ques_div";
         
             //QUESTION
             var para = document.createElement("p");
@@ -286,6 +290,9 @@ function load_exam(obj){
 
             //OPTIONS
             for(var i=1;i<=4;i++){
+
+                var opt_div = document.createElement("div");
+                opt_div.className = "opt_div";
 
                 var k = "option";
                 k+=i;
@@ -298,31 +305,41 @@ function load_exam(obj){
                   
                 var label = document.createElement('label')
                 label.htmlFor = String.fromCharCode(i+64);
+                label.classList = "opt";
                   
                 var description = document.createTextNode(ques[k]);
                 label.appendChild(description);
+
+                opt_div.appendChild(opt);
+                opt_div.appendChild(label);
+                
+                opt_div.addEventListener("click",function(){
+                  $(this).children('input').prop('checked',true);
+                  $(this).siblings('.opt_div').css('background-color','rgb(7, 105, 235)');
+                  $(this).css('background-color','green');
+                });
                   
                 var newline = document.createElement('br');
                   
-                ques_div.appendChild(opt);
-                ques_div.appendChild(label);
+                ques_div.appendChild(opt_div);
                 ques_div.appendChild(newline);
             }
-
-            var hr = document.createElement('hr');
-            ques_div.appendChild(hr);
 
           document.getElementById('two').appendChild(ques_div);
 
         });
+
+        var submit_div = document.createElement('div');
+        submit_div.id = 'submit_div';
         
         var submitbtn = document.createElement("button");
-        submitbtn.className = "submitexam";
+        submitbtn.classList = "submitexam btn btn-danger";
         submitbtn.textContent = "SUBMIT";
-        submitbtn.id = "mybtn";
+        submitbtn.id = "submitTest";
         var newline = document.createElement('br');
+        submit_div.appendChild(submitbtn);
         document.getElementById('two').appendChild(newline);
-        document.getElementById('two').appendChild(submitbtn);
+        document.getElementById('two').appendChild(submit_div);
 
         $('#one').hide();
         $('#two').show();
@@ -335,8 +352,9 @@ function load_exam(obj){
 function exitHandler(){
   if(!document.fullscreenElement){
       console.log("Exit Screen");
-      $('#mybtn').click();
+      $('#submitTest').click();
   }
 }
+
 
 document.addEventListener('fullscreenchange',exitHandler,false);
