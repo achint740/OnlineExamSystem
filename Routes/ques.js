@@ -55,7 +55,7 @@ route.post('/update',function(req,res){
                 answer : req.body.answer
             })
             .then((updatedQues)=>{
-                console.log('Question Updated!');
+                console.log('Question Updated!' + updatedQues.dataValues.question);
                 res.send('Update Successfull');
             })
             .catch((err)=>{

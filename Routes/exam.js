@@ -22,12 +22,23 @@ route.post('/get_time',function(req,res){
     }).then((sub)=>{
         if(sub){
             console.log("Subject Found");
-            let msg = {
-                status : "Success",
-                date : sub.dataValues.date_of_exam,
-                time : sub.dataValues.time_of_exam,
+            let final = sub.dataValues.exam_status;
+            if(final==1){
+                let msg = {
+                    status : "Success",
+                    date : sub.dataValues.date_of_exam,
+                    time : sub.dataValues.time_of_exam,
+                    duration : sub.dataValues.exam_duration
+                }
+                res.send(msg);
             }
-            res.send(msg);
+            else{
+                console.log('Subject Not finalised!');
+                let msg = {
+                    status : "Failure"
+                }
+                res.send(msg);
+            }
         }
         else{
             console.log("Subject Not Found");
