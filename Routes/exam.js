@@ -51,6 +51,27 @@ route.post('/get_time',function(req,res){
 });
 
 
+//----------------------------- POST REQUEST FOR GET EXAMINATION STATUS-----------------------------
+route.post('/lock',function(req,res){
+    let obj = {
+        status : 0
+    };
+    subjects.findOne({
+        where : {
+            sub_code : req.body.sub_code
+        }
+    }).then((sub)=>{
+        if(sub && sub.dataValues.exam_status){
+            obj.status = 1;
+            res.send(obj); 
+        }
+        else{
+            res.send(obj);
+        }
+    });
+})
+
+
 //----------------------------- POST REQUEST FOR SCHEDULE EXAMINATION -----------------------------
 route.post('/schedule',function(req,res){
 
@@ -124,7 +145,7 @@ function buildSheet(sub_code,col){
     var filename = "Responses.xlsx";
     workbook.xlsx.writeFile(filename).then(()=>{
         // callback(null);
-        console.log('Success');
+        console.log('Success! Sheet Created');
     }).catch((err)=>{
         console.log(err);
     });

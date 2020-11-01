@@ -8,6 +8,16 @@ route.use(passport.initialize());
 route.use(passport.session());
 
 
+//----------------------------- GET REQUEST FOR VIEW USERS -----------------------------
+route.get('/list',(req,res)=>{
+    users.findAll({
+
+    }).then((userslist)=>{
+        res.send(userslist);
+    })
+});
+
+
 //----------------------------- POST REQUEST FOR ADD USER -----------------------------
 route.post('/add',(req,res)=>{
     users.create({
@@ -23,6 +33,37 @@ route.post('/add',(req,res)=>{
         console.log("Error Occured : " + err);
         res.send('Failure');
     })
+});
+
+
+//-----------------------------POST REQUEST FOR UPDATE QUESTION -----------------------------
+route.post('/update',function(req,res){
+
+    users.findOne({
+        where : {
+            username : req.body.username,
+        }
+    }).then((user)=>{
+        if(user){
+            msg = 'Success';
+            user.update({
+                username : req.body.username,
+                password : req.body.password,
+                category : req.body.category
+            })
+            .then((updatedUser)=>{
+                console.log('User Updated!');
+                res.send('Update Successfull');
+            })
+            .catch((err)=>{
+                console.log('Error Occured ' + err);
+                res.send('Failed to Update! ERROR');
+            })
+        }
+        else{
+            res.send('User not found in database! Consistency error');
+        }
+    });
 });
 
 

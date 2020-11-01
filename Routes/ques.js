@@ -35,6 +35,7 @@ route.post('/add',function(req,res){
     });
 });
 
+
 //-----------------------------POST REQUEST FOR UPDATE QUESTION -----------------------------
 route.post('/update',function(req,res){
 
@@ -55,7 +56,7 @@ route.post('/update',function(req,res){
                 answer : req.body.answer
             })
             .then((updatedQues)=>{
-                console.log('Question Updated!' + updatedQues.dataValues.question);
+                console.log('Question Updated!');
                 res.send('Update Successfull');
             })
             .catch((err)=>{

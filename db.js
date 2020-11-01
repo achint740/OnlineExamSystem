@@ -17,10 +17,11 @@ const subjectsDB = db.define('subjects',{
     },
     date_of_exam : {
         type : Sequelize.DATEONLY,
+        allowNull : false
     },
     time_of_exam : {
         type : Sequelize.TIME,
-        allowNull : true
+        allowNull : false
     },
     exam_status : {
         type : Sequelize.INTEGER,
@@ -39,10 +40,6 @@ const quesDB = db.define('ques',{
     sub_code : {
         type : Sequelize.STRING,
         allowNull : false
-    },
-    ques_no : {
-        type : Sequelize.INTEGER,
-        allowNull : true
     },
     question : {
         type : Sequelize.STRING,
