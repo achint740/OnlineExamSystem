@@ -1,33 +1,224 @@
-function add(){
-    let obj = {
-        username : $('#userid0').val(),
-        password : $('#temp_pass').val(),
-        category : $('#category').val()
-    };
+$(()=>{
+    
+    $("#logout").hide();
+    $.get('/users/profile',(data)=>{
+        if(data.username==undefined){
+            alert("Please Login");
+            document.location.href='/login';
+        }
+        else if(data.category!="admin"){
+            alert("Not Authorized");
+            document.location.href = '/';
+        }
+        else{
+            console.log("Welcome " + data.username);
+            $('#login123')
+                .text(data.username)
+                .attr("href","#")
+            $("#logout").show();
+            viewusers();
+        }
+    });
+});
 
-    $.post('/users/add',obj,(data)=>{
-        alert('User Add : ' + data);
+$('#logout').on('click',()=>{
+    $.get('/users/logout',(data)=>{
         if(data=='Success'){
-            $('#userid0').val('');
-            $('#temp_pass').val('');
-            $('#category').val('Category');
+            alert("Logged Out! Please login to access the portal");
+            document.location.href = '/login';
+        }
+    });
+});
+
+let total_users = 0;
+
+function adduser(){
+    var new_row = document.createElement("tr");
+            
+    //Serial Number
+    var sno = document.createElement('th');
+    var sno_text = document.createTextNode(total_users);
+    sno.appendChild(sno_text);
+    new_row.appendChild(sno);
+
+    //UserName 
+    var username = document.createElement("td");
+    var user_text = document.createTextNode("Enter UserName");
+    username.appendChild(user_text);
+    username.contentEditable = "true";
+    new_row.appendChild(username);
+
+    //Password 
+    var password = document.createElement("td");
+    var pass_text = document.createTextNode("Enter Password");
+    password.appendChild(pass_text);
+    password.contentEditable = "true";
+    new_row.appendChild(password);
+
+    //Category 
+    var category = document.createElement("td");
+    var category_text = document.createTextNode("Enter Category");
+    category.appendChild(category_text);
+    category.contentEditable = "true";
+    new_row.appendChild(category);
+
+    //UPDATE
+    var btn_td1 = document.createElement("td");
+    var add_btn = document.createElement("button");
+    add_btn.textContent = "Add";
+    add_btn.className = "btn btn-success";
+    btn_td1.appendChild(add_btn);
+    new_row.appendChild(btn_td1);
+
+    add_btn.addEventListener("click",function(){
+
+        if(this.textContent == "Update"){
+            upd(this);
+        }
+        else{
+            let new_user = {
+                username : this.parentElement.previousSibling.previousSibling.previousSibling.innerHTML,
+                password : this.parentElement.previousSibling.previousSibling.innerHTML,
+                category : this.parentElement.previousSibling.innerHTML
+            }
+            $.post('/users/add',new_user,(data)=>{
+                if(data=='Success'){
+                    alert('User Added Successfully');
+                    this.textContent = "Update";
+                    this.className = "btn btn-warning"
+                    total_users+=1;
+                    this.parentElement.nextSibling.children[0].textContent = "Delete";
+                }
+                
+            });
         }
     });
 
+    //DELETE
+    var btn_td2 = document.createElement("td");
+    var del_btn = document.createElement("button");
+    del_btn.textContent = "Remove";
+    del_btn.className = "btn btn-danger";
+    btn_td2.appendChild(del_btn);
+    del_btn.addEventListener("click",function(){
+        if(this.textContent == "Delete"){
+            del(this);
+        }
+        else{
+            this.parentElement.parentElement.remove();
+        }
+    })
+    new_row.appendChild(btn_td2);
+
+    $(new_row).prependTo("table > tbody");
 }
 
-function deleteuser(){
-    let obj = {
-        username : $('#userid2').val()
+function upd(btn){
+    let user = {
+        username : btn.parentElement.previousSibling.previousSibling.previousSibling.innerHTML,
+        password : btn.parentElement.previousSibling.previousSibling.innerHTML,
+        category : btn.parentElement.previousSibling.innerHTML
     };
-    $.post('/users/delete',obj,(data)=>{
+    $.post('/users/update',user,(data)=>{
         alert(data);
-        if(data=='Success'){
-            $('#userid2').val('');
-        }
     });
 }
 
-function edituser(){
-    console.log('User Edit');
+function del(btn){
+    let user = {
+        username : btn.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML
+    };
+    $.post('/users/delete',user,(data)=>{
+        alert(data);
+        btn.parentElement.parentElement.remove();
+    });
+}
+
+function viewusers(){
+    var i  = 1;
+    $.get('/users/list',(userlist)=>{
+        var tablebody = document.createElement("tbody");
+        $('.wrapper').hide();
+        userlist.forEach((user)=>{
+            var new_row = document.createElement("tr");
+            
+            //Serial Number
+            var sno = document.createElement('th');
+            var sno_text = document.createTextNode(i);
+            sno.appendChild(sno_text);
+            new_row.appendChild(sno);
+
+            //UserName 
+            var username = document.createElement("td");
+            var user_text = document.createTextNode(user["username"]);
+            username.appendChild(user_text);
+            new_row.appendChild(username);
+
+            //Password 
+            var password = document.createElement("td");
+            var pass_text = document.createTextNode(user["password"]);
+            password.appendChild(pass_text);
+            password.contentEditable = "true";
+            new_row.appendChild(password);
+
+            //Category 
+            var category = document.createElement("td");
+            var category_text = document.createTextNode(user["category"]);
+            category.appendChild(category_text);
+            category.contentEditable = "true";
+            new_row.appendChild(category);
+
+            //UPDATE
+            var btn_td1 = document.createElement("td");
+            var upd_btn = document.createElement("button");
+            upd_btn.textContent = "Update";
+            upd_btn.className = "btn btn-warning";
+            btn_td1.appendChild(upd_btn);
+            upd_btn.addEventListener("click",function(){
+                upd(this);
+            });
+            new_row.appendChild(btn_td1);
+
+            //DELETE
+            var btn_td2 = document.createElement("td");
+            var del_btn = document.createElement("button");
+            del_btn.textContent = "Delete";
+            del_btn.className = "btn btn-danger";
+            btn_td2.appendChild(del_btn);
+            del_btn.addEventListener("click",function(){
+                del(this);
+            })
+            new_row.appendChild(btn_td2);
+
+
+            tablebody.appendChild(new_row);
+            i++;
+            total_users = i;
+        });
+
+        document.getElementById('users_table').appendChild(tablebody);
+    });
+}
+
+
+function filter_users() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("filter");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("users_table");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
 }
