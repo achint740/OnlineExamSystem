@@ -2,7 +2,7 @@ $(()=>{
 
     setTimeout(()=>{
         $('.wrapper').hide();
-    },3000);
+    },2000);
     
     $("#logout").hide();
     $.get('/users/profile',(data)=>{
