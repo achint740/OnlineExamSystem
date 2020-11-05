@@ -43,14 +43,26 @@ $("#create_exam").on('click',()=>{
         duration : $('#duration').val()
     };
 
-    $.post('/exam/schedule',obj,(data)=>{
-        if(data=='Success'){
-            alert('Subject Added to Database');
-            document.location.href = "../../Questions/index.html";
-        }
-        else{
-            alert('Subject with this code already exists!');
+    let res = true;
+    Object.keys(obj).forEach(function(key){
+        if(obj[key]==""){
+            res = false;
         }
     });
+
+    if(res){
+        $.post('/exam/schedule',obj,(data)=>{
+            if(data=='Success'){
+                alert('Subject Added to Database');
+                document.location.href = "../../Questions/index.html";
+            }
+            else{
+                alert('Subject with this code already exists!');
+            }
+        });
+    }
+    else{
+        alert('Please fill out all the fields');
+    }
 
 });
