@@ -1,4 +1,26 @@
 $(()=>{
+
+    var modal = $("#myModal");
+
+    var book = $("#book");
+
+    var cross =$("#close");
+
+    
+
+    cross.click(function() {
+        modal.hide();
+        $('body').removeClass('blur')
+        $('modal').removeClass('opaque')
+    })
+
+    // When the user clicks anywhere outside of the modal, close it
+    $().click(function(event) {
+        if (event.target == modal) {
+        modal.hide();
+        }
+    })
+
     
     $("#logout").hide();
     $.get('/users/profile',(data)=>{
@@ -19,7 +41,6 @@ $(()=>{
             viewusers();
         }
     });
-});
 
 $('#logout').on('click',()=>{
     $.get('/users/logout',(data)=>{
@@ -125,13 +146,25 @@ function upd(btn){
 }
 
 function del(btn){
+    $('body').addClass('blur')
+
+    modal.addClass('opaque')
+
+    modal.css("display", "block")
     let user = {
         username : btn.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML
     };
-    $.post('/users/delete',user,(data)=>{
-        alert(data);
-        btn.parentElement.parentElement.remove();
+    $('#modalName').val(user.username);
+    $('#modalSubmit').on('click',()=>{
+        modal.css("display","none");
+        $.post('/users/delete',user,(data)=>{
+            alert(data);
+            btn.parentElement.parentElement.remove();
+        });
     });
+    $('#cancel').on('click',()=>{
+        modal.css("display","none");
+    })
 }
 
 function viewusers(){
@@ -156,9 +189,25 @@ function viewusers(){
 
             //Password 
             var password = document.createElement("td");
+            var pass_div = document.createElement("div");
+            var pass_span = document.createElement("span");
+            var pass_i = document.createElement("i");
+            pass_i.className = "fa fa-eye-slash";
+            pass_span.appendChild(pass_i);
+            var pass_p = document.createElement("p");
             var pass_text = document.createTextNode(user["password"]);
-            password.appendChild(pass_text);
-            password.contentEditable = "true";
+            pass_p.appendChild(pass_text);
+            // pass_p.hidden = "true";
+            pass_div.appendChild(pass_p);
+            pass_div.appendChild(pass_span);
+            password.appendChild(pass_div);
+            pass_p.contentEditable = "true";
+            pass_span.addEventListener("click", function(){
+                // alert('clicked');
+                // pass_p.hidden = "false";
+                this.hidden = "true";
+                // this.previousSibling.hidden = "false";
+            });
             new_row.appendChild(password);
 
             //Category 
@@ -222,3 +271,5 @@ function filter_users() {
       }
     }
 }
+
+});

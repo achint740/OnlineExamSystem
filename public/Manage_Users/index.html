@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Manage Users</title>
 </head>
@@ -81,6 +82,23 @@
           </tr>
         </thead>
       </table>
+
+      <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="close">&times;</button>
+                <h2>Confirm Deletion</h2>
+            </div>
+            <div class="modal-body">
+                <label for="modalName" class="column-1">Username</label>
+                <input type="text" class="column" id="modalName" name="username" readonly="true"></input>
+                <button type="submit" id="modalSubmit" class="btn">Confirm</button>
+                <button id="cancel" class = "btn btn-danger">Cancel</button>
+            </div>
+        </div>
+
+    </div>
     
     <script src="../jQuerry.js"></script>
     <script src="script.js"></script>
