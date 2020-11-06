@@ -1,9 +1,9 @@
-$(document).ready(()=>{
+$(()=>{
     $.get('/users/profile',(data)=>{
 
         setTimeout(()=>{
           $('.wrapper').hide();
-        },0);
+        },2000);
 
         if(data.username!=undefined){
             console.log("Welcome " + data.username);
@@ -16,8 +16,31 @@ $(document).ready(()=>{
     });
 
     $('#two').hide();
-    $('#three').hide();
-});
+
+    var modal = $("#myModal");
+
+    var book = $("#book");
+
+    var cross =$("#close");
+
+    cross.click(function() {
+        modal.hide();
+        $('body').removeClass('blur')
+        $('modal').removeClass('opaque')
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    $().click(function(event) {
+        if (event.target == modal) {
+          modal.hide();
+        }
+      });
+
+    $('#modalSubmit').on('click',()=>{
+      modal.hide();
+      $('body').removeClass('blur')
+      $('modal').removeClass('opaque')
+    });
 
 $("#logout").on('click',function(){
   $.get("/users/logout",(data)=>{
@@ -46,7 +69,7 @@ const COLOR_CODES = {
   }
 };
 
-const TIME_LIMIT = 7200;
+let TIME_LIMIT = 7200;
 let timePassed = 0;
 let timeLeft = TIME_LIMIT;
 let timerInterval = null;
@@ -210,11 +233,12 @@ $('#attemptexam').on('click',()=>{
     };
 
     $.post('/exam/get_time',obj,(data)=>{
-      
+        let duration = +(data.duration);
+        console.log("Data Received : " + data.duration);
         compare_date(data).then((result)=>{
           console.log("Compare karke result aaya : " + result);
           if(result == -1){
-              alert("No such exam scheduled");
+              alert("No such exam scheduled or Exam not finalised");
           }
           else if(result==0){
               alert('Not allowed to give exam now! Exam Scheduled at ' + data.date + ' at ' + data.time);
@@ -232,7 +256,7 @@ $('#attemptexam').on('click',()=>{
                   else{
                       alert('Sending request to view questions in Exam ' + code);
                       document.documentElement.requestFullscreen();
-                      load_exam(obj);
+                      load_exam(obj,duration);
                   }
               });
           }
@@ -242,31 +266,41 @@ $('#attemptexam').on('click',()=>{
 
 $('#getmarks').on('click',()=>{
 
-    $('#three').show();
-
     let obj = {
         sub_code : $('#sub_code2').val()
     }
 
     $.post('/marks/my',obj,(data)=>{
-        var m = document.createTextNode(data.marks_given);
-        console.log(data);
-        document.getElementById('myscore').appendChild(m);
+      if(data=='Not Attempted!'){
+        alert(data + ' Or No Such Exam');
+      }
+      else{
+        $('body').addClass('blur');
+        modal.addClass('opaque');
+        modal.css("display", "block");
+        $('#modalName').val(data.username);
+        $('#st_marks').val(data.marks_given);
+      }
     });
 
 })
 
-function load_exam(obj){
+function load_exam(obj,duration){
 
     $.post('/exam/view',obj,(data)=>{
 
         if(data.length==0){
-            alert("No Such Exam Scheduled!");
+            alert("No Questions found!");
             document.location.href = '/student';
         }
 
-        document.body.style.backgroundImage = "url('./Img/b3.jpg')";
+        for(let i = data.length - 1 ; i > 0 ; i-- ){
+          let j = Math.floor(Math.random() * (i + 1));
+          [data[i], data[j]] = [data[j], data[i]];
+        }
 
+        document.body.style.backgroundImage = "url('./Img/b3.jpg')";
+        TIME_LIMIT = duration*3600;
 
         var code_inp = document.createElement("input");
         code_inp.type = 'text';
@@ -343,7 +377,7 @@ function load_exam(obj){
 
         $('#one').hide();
         $('#two').show();
-
+        
         startTimer();
 
     });
@@ -358,3 +392,5 @@ function exitHandler(){
 
 
 document.addEventListener('fullscreenchange',exitHandler,false);
+
+});

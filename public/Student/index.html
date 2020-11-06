@@ -54,17 +54,31 @@
         </div>
     </div>
     
-        <form id="two" action="/exam/submit" method="POST">
+    <form id="two" action="/exam/submit" method="POST">
             
-            <div id="header">
-                <div id="app"></div>
-                <h1 id="examfor">Exam For : </h1>
+        <div id="header">
+            <div id="app"></div>
+            <h1 id="examfor">Exam For : </h1>
+        </div>
+
+    </form>
+
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="close">&times;</button>
+                <h2>Result</h2>
             </div>
+            <div class="modal-body">
+                <label for="modalName" class="column-1">Username</label>
+                <input type="text" class="column" id="modalName" name="username" readonly="true"></input>
+                <label for="marks" class="column-1">Marks</label>
+                <input type="text" class="column" id="st_marks" name="marks" readonly="true"></input>
+                <button id="modalSubmit" class="btn">OK</button>
+            </div>
+        </div>
 
-        </form>
-
-    <div id="three">
-        <h1 id="myscore">Your Marks : </h1>
     </div>
 
     <script src="../jQuerry.js"></script>
