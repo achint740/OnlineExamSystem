@@ -1,6 +1,7 @@
 const route = require('express').Router();
 const users = require('../db').usersDB;
 const marks = require('../db').marksDB;
+const subjects = require('../db').subjectsDB;
 const passport = require('../passport');
 
 
@@ -38,7 +39,17 @@ route.post('/my',function(req,res){
     })
     .then((mymarks)=>{
         if(mymarks){
-            res.send(mymarks);
+            subjects.findOne({
+                where : {
+                    sub_code : req.body.sub_code
+                }
+            }).then((subject_info)=>{
+                res.send({
+                    marks : mymarks.dataValues.marks_given,
+                    username : req.user.username,
+                    max_marks : +(subject_info.dataValues.ques_cnt)
+                });
+            });
         }
         else{
             res.send('Not Attempted!');

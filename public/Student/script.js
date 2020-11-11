@@ -279,7 +279,11 @@ $('#getmarks').on('click',()=>{
         modal.addClass('opaque');
         modal.css("display", "block");
         $('#modalName').val(data.username);
-        $('#st_marks').val(data.marks_given);
+        data.max_marks*=4;
+        let v = data.marks;
+        v+= "/";
+        v+= data.max_marks;
+        $('#st_marks').val(v);
       }
     });
 
