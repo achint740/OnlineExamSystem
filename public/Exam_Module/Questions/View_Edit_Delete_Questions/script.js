@@ -29,27 +29,28 @@ $('#logout').on('click',()=>{
 });
 
 $('#viewexam').on('click',()=>{
-    let code = $('#sub_code').val();
-    console.log('Sending request to view questions in Exam ' + code);
+    // console.log('Sending request to view questions in Exam ' + code);
 
     let obj = {
-        sub_code : code
+        sub_code : $('#sub_code').val()
     };
 
-    $.post('/exam/view',obj,(data)=>{
-        // console.log(data);
-        if(data.length == 0){
-            alert('No Questions for : ' + obj.sub_code);
-        }
-        else{
+    $.post('/exam/lock',obj,(data)=>{
+        console.log('Exam Status : ' + data.status);
+        let examstatus = data.status;
+        $.post('/exam/view',obj,(data)=>{
             $('#two').empty();
-            create_header();
-            view_ques(data);
-        }
-
+            if(data.length == 0){
+                alert('No Questions for : ' + obj.sub_code);
+            }
+            else{
+                create_header();
+                view_ques(data,examstatus);
+            }
+        });
+    
+        $('#two').show();
     });
-
-    $('#two').show();
 
 });
 
@@ -127,11 +128,10 @@ function delete_ques(obj){
     });
 }
 
-function view_ques(questions_list){
+function view_ques(questions_list,examstatus){
     var tablebody = document.createElement("tbody");
     questions_list.forEach((question)=>{
 
-        
         var new_row = document.createElement("tr");
 
         //QUESTION ID   
@@ -173,6 +173,7 @@ function view_ques(questions_list){
         var upd_btn = document.createElement("button");
         upd_btn.textContent = "Update";
         upd_btn.className = "btn btn-warning";
+        upd_btn.disabled = examstatus;
         btn_td1.appendChild(upd_btn);
         new_row.appendChild(btn_td1);
 
@@ -195,6 +196,7 @@ function view_ques(questions_list){
         var del_btn = document.createElement("button");
         del_btn.textContent = "Delete";
         del_btn.className = "btn btn-danger";
+        del_btn.disabled = examstatus;
         btn_td2.appendChild(del_btn);
         new_row.appendChild(btn_td2);
 

@@ -39,8 +39,21 @@ function addques(){
         sub_code : $('#sub_code').val(),
         ans : $('#ans1').val()
     }
-    $.post('/ques/add',obj,(data)=>{
-        document.location.href = "index.html";
-        alert(data);
+    
+    let res = true;
+    Object.keys(obj).forEach(function(key){
+        if(obj[key]==""){
+            res = false;
+        }
     });
+
+    if(res){
+        $.post('/ques/add',obj,(data)=>{
+            document.location.href = "index.html";
+            alert(data);
+        });
+    }
+    else{
+        alert('Please fill out all the fields');
+    }
 }
