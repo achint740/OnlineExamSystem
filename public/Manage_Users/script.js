@@ -1,12 +1,10 @@
-$(()=>{
+// $(()=>{
 
     var modal = $("#myModal");
 
     var book = $("#book");
 
     var cross =$("#close");
-
-    
 
     cross.click(function() {
         modal.hide();
@@ -21,7 +19,6 @@ $(()=>{
         }
     })
 
-    
     $("#logout").hide();
     $.get('/users/profile',(data)=>{
         if(data.username==undefined){
@@ -53,7 +50,7 @@ $('#logout').on('click',()=>{
 
 let total_users = 0;
 
-function adduser(){
+function add_user(){
     var new_row = document.createElement("tr");
             
     //Serial Number
@@ -71,9 +68,10 @@ function adduser(){
 
     //Password 
     var password = document.createElement("td");
-    var pass_text = document.createTextNode("Enter Password");
-    password.appendChild(pass_text);
-    password.contentEditable = "true";
+    var pass_inp = document.createElement("input");
+    pass_inp.type = "password";
+    pass_inp.placeholder = "Temporary Password";
+    password.appendChild(pass_inp);
     new_row.appendChild(password);
 
     //Category 
@@ -99,19 +97,27 @@ function adduser(){
         else{
             let new_user = {
                 username : this.parentElement.previousSibling.previousSibling.previousSibling.innerHTML,
-                password : this.parentElement.previousSibling.previousSibling.innerHTML,
+                password : this.parentElement.previousSibling.previousSibling.firstElementChild.value,
                 category : this.parentElement.previousSibling.innerHTML
             }
-            $.post('/users/add',new_user,(data)=>{
-                if(data=='Success'){
-                    alert('User Added Successfully');
-                    this.textContent = "Update";
-                    this.className = "btn btn-warning"
-                    total_users+=1;
-                    this.parentElement.nextSibling.children[0].textContent = "Delete";
-                }
-                
-            });
+            if(password!=""){
+                $.post('/users/add',new_user,(data)=>{
+                    if(data=='Success'){
+                        alert('User Added Successfully');
+                        this.textContent = "Update";
+                        this.className = "btn btn-warning"
+                        total_users+=1;
+                        this.parentElement.nextSibling.children[0].textContent = "Delete";
+                    }
+                    else{
+                        alert("User with this ID already exists! \n Kindly change the credentials to add user");
+                    }
+                    
+                });
+            }
+            else{
+                alert("Enter a valid password");
+            }
         }
     });
 
@@ -137,12 +143,17 @@ function adduser(){
 function upd(btn){
     let user = {
         username : btn.parentElement.previousSibling.previousSibling.previousSibling.innerHTML,
-        password : btn.parentElement.previousSibling.previousSibling.innerHTML,
+        password : btn.parentElement.previousSibling.previousSibling.firstElementChild.value,
         category : btn.parentElement.previousSibling.innerHTML
     };
-    $.post('/users/update',user,(data)=>{
-        alert(data);
-    });
+    if(user.password!=""){
+        $.post('/users/update',user,(data)=>{
+            alert(data);
+        });
+    }
+    else{
+        alert("Enter a strong password");
+    }
 }
 
 function del(btn){
@@ -189,25 +200,11 @@ function viewusers(){
 
             //Password 
             var password = document.createElement("td");
-            var pass_div = document.createElement("div");
-            var pass_span = document.createElement("span");
-            var pass_i = document.createElement("i");
-            pass_i.className = "fa fa-eye-slash";
-            pass_span.appendChild(pass_i);
-            var pass_p = document.createElement("p");
-            var pass_text = document.createTextNode(user["password"]);
-            pass_p.appendChild(pass_text);
-            // pass_p.hidden = "true";
-            pass_div.appendChild(pass_p);
-            pass_div.appendChild(pass_span);
-            password.appendChild(pass_div);
-            pass_p.contentEditable = "true";
-            pass_span.addEventListener("click", function(){
-                // alert('clicked');
-                // pass_p.hidden = "false";
-                this.hidden = "true";
-                // this.previousSibling.hidden = "false";
-            });
+            var pass_text = user["password"];
+            var pass_inp = document.createElement("input");
+            pass_inp.type = "password";
+            pass_inp.value = pass_text;
+            password.appendChild(pass_inp);
             new_row.appendChild(password);
 
             //Category 
@@ -272,4 +269,4 @@ function filter_users() {
     }
 }
 
-});
+// });
