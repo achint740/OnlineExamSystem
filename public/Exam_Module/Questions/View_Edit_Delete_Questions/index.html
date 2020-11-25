@@ -29,6 +29,23 @@
     <table id="two">
     </table>
 
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="close">&times;</button>
+                <h2>Confirm Deletion</h2>
+            </div>
+            <div class="modal-body">
+                <label for="modalName" class="column-1">Question ID</label>
+                <input type="text" class="column" id="modalName" name="username" readonly="true"></input>
+                <button type="submit" id="modalSubmit" class="btn">Confirm</button>
+                <button id="cancel" class = "btn btn-danger">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+
     <script src="../../../jQuerry.js"></script>
     <script src="script.js"></script>
 </body>

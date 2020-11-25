@@ -70,6 +70,30 @@
             <button id="create_exam" type="button" class="btn btn-primary" >CREATE</button>
         </div>
     </div>
+
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="close">&times;</button>
+                <h2>Confirm Schedule</h2>
+            </div>
+            <div class="modal-body">
+                <label for="modalName" class="column-1">Subject Code</label>
+                <input type="text" class="column" id="modalName" name="username" readonly="true"></input>
+                <label for="modalDate" class="column-1">Date</label>
+                <input type="date" class="column" id="modalDate" name="username" readonly="true"></input>
+                <br>
+                <label for="modalTime" class="column-1">Time</label>
+                <input type="time" class="column" id="modalTime" name="username" readonly="true"></input>
+                <label for="modalDuration" class="column-1">Duration</label>
+                <input type="number" class="column" id="modalDuration" name="username" readonly="true"></input>
+                <button type="submit" id="modalSubmit" class="btn">Confirm</button>
+                <button id="cancel" class = "btn btn-danger">Cancel</button>
+            </div>
+        </div>
+
+    </div>
     
 
     <script src="../../../jQuerry.js"></script>

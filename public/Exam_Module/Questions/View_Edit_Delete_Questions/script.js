@@ -18,6 +18,25 @@ $(()=>{
     $('#two').hide();
 });
 
+var modal = $("#myModal");
+
+var book = $("#book");
+
+var cross =$("#close");
+
+cross.click(function() {
+    modal.hide();
+    $('body').removeClass('blur')
+    $('modal').removeClass('opaque')
+})
+
+// When the user clicks anywhere outside of the modal, close it
+$().click(function(event) {
+    if (event.target == modal) {
+    modal.hide();
+    }
+})
+
 $('#logout').on('click',()=>{
     $.get('/users/logout',(data)=>{
         if(data=='Success'){
@@ -117,14 +136,28 @@ function update_ques(obj){
     });
 }
 
-function delete_ques(obj){
-    $.post('/ques/delete',obj,(data)=>{
-        if(data=='Success'){
-            $('#viewexam').click();
-            alert("Q" + obj.id + " Deleted Successfully");
-        }
-        else 
-            alert('Error! Try Again Please');
+function delete_ques(btn, obj){
+
+    $('#modalName').val("Q" + obj.id);
+
+    $('body').addClass('blur');
+    modal.addClass('opaque');
+    modal.css("display", "block");
+
+    $('#modalSubmit').on('click',()=>{
+        modal.css("display","none");
+        $.post('/ques/delete',obj,(data)=>{
+            if(data=='Success'){
+                $('#viewexam').click();
+                alert("Q" + obj.id + " Deleted Successfully");
+            }
+            else 
+                alert('Error! Try Again Please');
+        });
+    });
+
+    $('#cancel').on('click',()=>{
+        modal.css("display","none");
     });
 }
 
@@ -205,7 +238,7 @@ function view_ques(questions_list,examstatus){
                 sub_code : $('#sub_code').val(),
                 id : this.parentElement.parentElement.firstChild.id
             };
-            delete_ques(obj);
+            delete_ques(this,obj);
         });
 
 
