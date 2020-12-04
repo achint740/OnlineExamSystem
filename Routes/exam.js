@@ -15,6 +15,9 @@ route.use(passport.session());
 
 //----------------------------- POST REQUEST FOR GET EXAMINATION SCHEDULE-----------------------------
 route.post('/get_time',function(req,res){
+    if(!req.user){
+        return res.redirect('/login');
+    }
     subjects.findOne({
         where : {
             sub_code : req.body.sub_code
@@ -53,6 +56,9 @@ route.post('/get_time',function(req,res){
 
 //----------------------------- POST REQUEST FOR GET EXAMINATION STATUS-----------------------------
 route.post('/lock',function(req,res){
+    if(!req.user){
+        return res.redirect('/login');
+    }
     let obj = {
         status : 0
     };
@@ -74,7 +80,9 @@ route.post('/lock',function(req,res){
 
 //----------------------------- POST REQUEST FOR SCHEDULE EXAMINATION -----------------------------
 route.post('/schedule',function(req,res){
-
+    if(!req.user){
+        return res.redirect('/login');
+    }
     subjects.create({
         sub_code : req.body.sub_code,
         sub_name : req.body.sub_name,
@@ -96,7 +104,9 @@ route.post('/schedule',function(req,res){
 
 //----------------------------- POST REQUEST FOR VIEW EXAMINATION -----------------------------
 route.post('/view',function(req,res){
-
+    if(!req.user){
+        return res.redirect('/login');
+    }
     questions.findAll({
         where : {
             sub_code : req.body.sub_code
@@ -154,7 +164,9 @@ function buildSheet(sub_code,col){
 
 //-----------------------------POST REQUEST FOR FINALISE EXAM -----------------------------
 route.post('/finalise',function(req,res){
-
+    if(!req.user){
+        res.redirect('/login');
+    }
     questions.findAll({
         where : {
             sub_code : req.body.sub_code
@@ -191,7 +203,9 @@ route.post('/finalise',function(req,res){
 
 //-----------------------------POST REQUEST FOR SUBMIT EXAM -----------------------------
 route.post('/submit',function(req,res){
-
+    if(!req.user){
+        res.redirect('/login');
+    }
     calculate_marks_store_responses_update_marks(req.body,req.user);
 
     res.redirect('/student');

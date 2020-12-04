@@ -12,7 +12,9 @@ route.use(passport.session());
 
 //-----------------------------POST REQUEST FOR VIEW MARKS LIST -----------------------------
 route.post('/list',function(req,res){
-
+    if(!req.user){
+        res.redirect('/login');
+    }
     marks.findAll({
         where : {
             sub_code : req.body.sub_code
@@ -31,6 +33,9 @@ route.post('/list',function(req,res){
 
 //-----------------------------POST REQUEST FOR VIEW MARKS -----------------------------
 route.post('/my',function(req,res){
+    if(!req.user){
+        res.redirect('/login');
+    }
     marks.findOne({
         where : {
             sub_code : req.body.sub_code,
@@ -57,8 +62,11 @@ route.post('/my',function(req,res){
     })
 })
 
-//-----------------------------POST REQUEST FOR CHNAGE MARKS -----------------------------
+//-----------------------------POST REQUEST FOR CHANGE MARKS -----------------------------
 route.post('/change',function(req,res) {
+    if(!req.user){
+        res.redirect('/login');
+    }
     let msg = 'Failure';
     marks.findOne({
         where : {sub_code : req.body.sub_code,username : req.body.username}
@@ -85,6 +93,9 @@ route.post('/change',function(req,res) {
 
 //-----------------------------POST REQUEST FOR CHECK ATTEMPT -----------------------------
 route.post('/checkattempt',function(req,res){
+    if(!req.user){
+        res.redirect('/login');
+    }
     marks.findOne({
         where : {
             sub_code : req.body.sub_code,

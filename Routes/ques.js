@@ -4,7 +4,9 @@ const subjects = require('../db').subjectsDB;
 
 //-----------------------------POST REQUEST FOR ADD QUESTION -----------------------------
 route.post('/add',function(req,res){
-
+    if(!req.user){
+        res.redirect('/login');
+    }
     subjects.findOne({
         where : {sub_code : req.body.sub_code}
     }).then((sub)=>{
@@ -38,7 +40,9 @@ route.post('/add',function(req,res){
 
 //-----------------------------POST REQUEST FOR UPDATE QUESTION -----------------------------
 route.post('/update',function(req,res){
-
+    if(!req.user){
+        res.redirect('/login');
+    }
     questions.findOne({
         where : {
             sub_code : req.body.sub_code,
@@ -73,6 +77,9 @@ route.post('/update',function(req,res){
 
 //-----------------------------POST REQUEST FOR DELETE QUESTION -----------------------------
 route.post('/delete',function(req,res){
+    if(!req.user){
+        res.redirect('/login');
+    }
     questions.destroy({
         where : {
             id : req.body.id,

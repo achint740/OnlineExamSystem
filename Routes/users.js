@@ -10,6 +10,9 @@ route.use(passport.session());
 
 //----------------------------- GET REQUEST FOR VIEW USERS -----------------------------
 route.get('/list',(req,res)=>{
+    if(!req.user){
+        res.redirect('/login');
+    }
     users.findAll({
 
     }).then((userslist)=>{
@@ -20,6 +23,9 @@ route.get('/list',(req,res)=>{
 
 //----------------------------- POST REQUEST FOR ADD USER -----------------------------
 route.post('/add',(req,res)=>{
+    if(!req.user){
+        res.redirect('/login');
+    }
     users.create({
         username : req.body.username,
         password : req.body.password,
@@ -38,7 +44,9 @@ route.post('/add',(req,res)=>{
 
 //-----------------------------POST REQUEST FOR UPDATE QUESTION -----------------------------
 route.post('/update',function(req,res){
-
+    if(!req.user){
+        res.redirect('/login');
+    }
     users.findOne({
         where : {
             username : req.body.username,
@@ -69,6 +77,9 @@ route.post('/update',function(req,res){
 
 //----------------------------- POST REQUEST FOR DELETE USER -----------------------------
 route.post('/delete',(req,res)=>{
+    if(!req.user){
+        res.redirect('/login');
+    }
     users.findOne({
         where  : {
             username : req.body.username
@@ -104,6 +115,9 @@ route.get('/profile',function(req,res){
 
 
 route.get('/logout',function(req,res){
+    if(!req.user){
+        res.redirect('/login');
+    }
     console.log("Logging Out " + req.user.username);
     req.logout();
     res.send('Success');
